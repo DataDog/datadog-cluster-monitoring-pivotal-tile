@@ -28,6 +28,8 @@ Send Cloud Foundry Application Metrics, Logs and Traces to Datadog!
 
 - Place the `datadog-firehose-nozzle-release.tgz` and the `datadog-agent-boshrelease.tgz` files into the `tile/resources` folder.
 
+- Update the `tile.yml` file to bump to the version of the agent boshrelease that you put in the resources folder.
+
 - Create the tile by specifying the version. Look at the [tile-history.yml](tile/tile-history.yml) for the latest version that was built.
     ```bash
     tile build <TILE_VERSION>
