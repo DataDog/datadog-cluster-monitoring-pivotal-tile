@@ -143,6 +143,19 @@ forms:
     label: Flush Max Bytes
     description: The maximum number of bytes to send per POST request
     default: 2097152
+  - name: org_data_collection_interval
+    type: integer
+    label: Org Data Collection Interval
+    description: The interval (in seconds) in which to submit organization metrics
+    default: 600
+  - name: api_batch_size
+    type: integer
+    label: Batch Sizes for V3 API
+    description: Size of batches in which to query V3 API to populate app cache (integer between 100 and 5000)
+    default: 500
+    constraints:
+      min: 100
+      max: 5000
 
 - name: datadog-agent-config
   label: Datadog Agent Config
@@ -376,6 +389,7 @@ packages:
           app_metrics: (( .properties.app_metrics.value ))
           num_workers: (( .properties.num_workers.value ))
           grab_interval: (( .properties.grab_interval.value ))
+          org_data_collection_interval: (( .properties.org_data_collection_interval.value ))
           http_proxy_url: (( .properties.http_proxy_url.value ))
           https_proxy_url: (( .properties.https_proxy_url.value ))
           no_proxy: (( .properties.no_proxy.value ))
@@ -385,6 +399,7 @@ packages:
           url: https://uaa.(( ..cf.cloud_controller.system_domain.value ))
         cc:
           endpoint: https://api.(( ..cf.cloud_controller.system_domain.value ))
+          api_batch_size: (( .properties.api_batch_size.value ))
 
 - name: datadog-agent-boshrelease
   type: bosh-release
