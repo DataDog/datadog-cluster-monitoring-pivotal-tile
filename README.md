@@ -1,6 +1,6 @@
-# Datadog Application Monitoring for PCF
+# Datadog Cluster Monitoring for Pivotal Platform
 
-Send Cloud Foundry Application Metrics, Logs and Traces to Datadog!
+Configuration file for the Datadog Cluster Monitoring tile for Pivotal Platform.
 
 # Build new tile
 
