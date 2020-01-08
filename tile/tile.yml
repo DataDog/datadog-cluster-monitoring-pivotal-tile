@@ -1,6 +1,6 @@
 name: datadog
 icon_file: resources/icon.png
-label: Datadog Cluster Monitoring for PCF
+label: Datadog Cluster Monitoring for Pivotal Platform
 description: Send metrics from Cloud Foundry metrics to Datadog!
 
 apply_open_security_group: false       # Apply open security group, default: false
