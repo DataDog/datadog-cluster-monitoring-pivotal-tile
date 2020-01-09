@@ -421,7 +421,8 @@ runtime_configs:
           - os: centos-7
         exclude:
           jobs:
-          - kubo
+          - name: kubelet
+            release: kubo
         jobs:
         - name: dd-agent
           release: datadog-agent
