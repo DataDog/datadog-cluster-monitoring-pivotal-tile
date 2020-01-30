@@ -191,6 +191,11 @@ forms:
     type: boolean
     default: true
     description: Enable the process agent.
+  - name: system_probe_enabled
+    label: Enable System Probe
+    type: boolean
+    default: true
+    description: Enable the system probe.
   - name: agent_listen_port
     type: string
     label: Agent Listen Port
@@ -431,7 +436,6 @@ runtime_configs:
             skip_ssl_validation: (( .properties.skip_ssl_validation.value ))
             use_dogstatsd: yes
             dogstatsd_port: 18125 # Many Cloud Foundry deployments have their own StatsD listening on port 8125
-            process_agent_enabled: yes
             api_key: (( .properties.api_key.value ))
             additional_api_key_1: (( .properties.additional_api_key_1.value ))
             additional_api_url_1: (( .properties.additional_api_url_1.value ))
@@ -454,6 +458,7 @@ runtime_configs:
             url: (( .properties.api_url.value ))
             use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
             process_agent_enabled: (( .properties.process_agent_enabled.value ))
+            system_probe_enabled: (( .properties.system_probe_enabled.value ))
             agent_listen_port: (( .properties.agent_listen_port.value ))
             generate_processes: (( .properties.generate_processes.value ))
             generate_monit_processes: (( .properties.generate_monit_processes.value ))
