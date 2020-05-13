@@ -1,7 +1,7 @@
 name: datadog
 icon_file: resources/icon.png
-label: Datadog Cluster Monitoring for Pivotal Platform
-description: Send metrics from Cloud Foundry metrics to Datadog!
+label: Datadog Cluster Monitoring for Tanzu
+description: Send metrics from Tanzu to Datadog!
 
 apply_open_security_group: false       # Apply open security group, default: false
 allow_paid_service_plans: false        # Allow paid service plans, default: false
@@ -9,7 +9,7 @@ allow_paid_service_plans: false        # Allow paid service plans, default: fals
 stemcell_criteria:
   os: ubuntu-xenial
   requires_cpi: false
-  version: '170'
+  version: '621'
 
 properties:
 - name: author
@@ -416,7 +416,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: datadog-agent
-          version: 2.13.7180 # Update this if update the agent
+          version: 2.13.7191 # Update this if update the agent
       addons:
       - name: datadog
         include:
