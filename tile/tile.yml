@@ -1,7 +1,7 @@
 name: datadog
 icon_file: resources/icon.png
-label: Datadog Cluster Monitoring for Tanzu
-description: Send metrics from Tanzu to Datadog!
+label: Datadog Cluster Monitoring for VMware Tanzu
+description: Send metrics from VMware Tanzu infrastructure to Datadog!
 
 apply_open_security_group: false       # Apply open security group, default: false
 allow_paid_service_plans: false        # Allow paid service plans, default: false
@@ -15,7 +15,7 @@ properties:
 - name: author
   type: string
   label: Author
-  value: Greg Meyer
+  value: Datadog
 
 forms:
 - name: datadog-config
@@ -301,6 +301,11 @@ forms:
     optional: true
     type: integer
     description: The timeout to execute the command in second.
+  - name: cluster_agent_poll_interval
+    label: Datadog Cluster Agent poll interval
+    type: integer
+    default: 10
+    description: How often to poll the Datadog Cluster Agent for new integration configurations (in seconds).
 
 - name: disk-check-config
   label: Disk integration configuration
@@ -317,6 +322,96 @@ forms:
     type: text
     optional: true
     description: Paste here the YAML configuration of the disk integration.
+
+- name: datadog-cluster-agent-config
+  label: Datadog Cluster Agent Settings
+  description: Configure the Datadog Cluster Agent to enable integration autodiscovery and improved tagging for application containers and processes discovery.
+  properties:
+  - name: cluster_agent_enabled
+    type: selector
+    label: Enable Datadog Cluster Agent
+    default: "Yes"
+    description: |
+      Whether or not to enable the Cluster Agent.
+      If disabled, remember to set the number of instances to 0 for the `datadog-cluster-agent` job in the `Resource Config` tab.
+    option_templates:
+    - name: disabled_option
+      select_value: "No"
+      property_blueprints:
+      - name: enabled_value
+        type: boolean
+        configurable: false
+        default: false
+      named_manifests:
+      - name: cluster_agent_enabled
+        manifest: |
+          false
+    - name: enabled_option
+      select_value: "Yes"
+      named_manifests:
+      - name: cluster_agent_enabled
+        manifest: |
+          true
+      property_blueprints:
+      - name: enabled_value
+        type: boolean
+        configurable: false
+        default: true
+      - name: cluster_agent_bbs_url
+        type: string
+        label: URL of the BBS API
+        default: https://bbs.service.cf.internal:8889
+        description: URL of the BBS API.
+      - name: cluster_agent_locket_api
+        type: string
+        label: Locket API location
+        default: locket.service.cf.internal:8891
+        description: Locket API location
+      - name: cluster_agent_bbs_poll_interval
+        type: integer
+        label: Polling interval of the BBS API
+        default: 15
+        description: Interval for refreshing autodiscovery data from BBS API (in seconds).
+      - name: cluster_agent_bbs_ca_crt
+        type: ca_certificate
+        label: PEM-encoded CA certificate
+        description: |-
+          PEM-encoded CA certificate for the BBS API communication.
+          Used to verify the identity specified in the input below.
+          Needs to be trusted by the BBS API server.
+      - name: cluster_agent_bbs_client_identity
+        configurable: true
+        type: rsa_cert_credentials
+        label: PEM-encoded client certificate and private key
+        description: |-
+          PEM-encoded client certificate and private key for the BBS API communication.
+          The automatic generation for this uses the OpsManager Root CA, which should be specified in the input above.
+      - name: cluster_agent_warmup_duration
+        type: integer
+        label: Warmup duration
+        default: 30
+        description: Number of seconds to wait for Node agents to report before starting to dispatch configurations.
+      - name: cluster_agent_log_level
+        type: string
+        label: Log level
+        default: INFO
+        description: Logging level for the cluster agent.
+      - name: cluster_agent_token
+        type: secret
+        label: Authentification token
+        constraints:
+          - must_match_regex: '^.{32,}$'
+            error_message: 'This token must be at least 32 characters long'
+        description: Token for Node Agent <-> Cluster Agent authentication. String of 32 characters or more.
+      - name: cluster_agent_port
+        type: port
+        label: Cluster Agent port
+        default: 5005
+        description: Port on which the Cluster Agent can be reached by Node Agents.
+      - name: cluster_agent_enabled
+        type: boolean
+        configurable: false
+        defaut: true
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -406,6 +501,34 @@ packages:
           endpoint: https://api.(( ..cf.cloud_controller.system_domain.value ))
           api_batch_size: (( .properties.api_batch_size.value ))
 
+- name: datadog-cluster-agent-boshrelease
+  type: bosh-release
+  path: resources/datadog-cluster-agent-boshrelease.tgz
+  jobs:
+    - name: datadog-cluster-agent
+      templates:
+      - name: datadog-cluster-agent
+        release: datadog-cluster-agent
+        provides:
+          datadog-cluster-agent:
+            as: datadog-cluster-agent-link
+            shared: true
+      dynamic_ip: 1
+      instances: 1
+      properties:
+        cluster_agent:
+          bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
+          locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
+          bbs_poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_poll_interval.value ))
+          bbs_ca_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_ca_crt.value ))
+          bbs_client_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.cert_pem ))
+          bbs_client_key: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.private_key_pem ))
+          warmup_duration: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_warmup_duration.value ))
+          log_level: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_log_level.value ))
+          token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
+          port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
+          enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
+
 - name: datadog-agent-boshrelease
   type: bosh-release
   path: resources/datadog-agent-boshrelease.tgz
@@ -416,7 +539,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: datadog-agent
-          version: 2.13.7191 # Update this if update the agent
+          version: 7.20.0-cc+dev.7 # Update this if update the agent
       addons:
       - name: datadog
         include:
@@ -431,6 +554,10 @@ runtime_configs:
         jobs:
         - name: dd-agent
           release: datadog-agent
+          consumes:
+            datadog-cluster-agent:
+              from: datadog-cluster-agent-link
+              deployment: (( ..datadog.deployment_name ))
         properties:
           dd:
             skip_ssl_validation: (( .properties.skip_ssl_validation.value ))
@@ -481,3 +608,4 @@ runtime_configs:
             secret_backend_arguments: (( .properties.secret_backend_arguments.parsed_strings ))
             secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value ))
             secret_backend_timeout: (( .properties.secret_backend_timeout.value ))
+            cluster_agent_poll_interval: (( .properties.cluster_agent_poll_interval.value ))
