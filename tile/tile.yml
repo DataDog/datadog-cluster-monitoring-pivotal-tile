@@ -194,7 +194,7 @@ forms:
   - name: system_probe_enabled
     label: Enable System Probe
     type: boolean
-    default: true
+    default: false
     description: Enable the system probe.
   - name: agent_listen_port
     type: string
