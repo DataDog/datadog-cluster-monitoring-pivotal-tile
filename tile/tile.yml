@@ -325,7 +325,9 @@ forms:
 
 - name: datadog-cluster-agent-config
   label: Datadog Cluster Agent Settings
-  description: Configure the Datadog Cluster Agent to enable integration autodiscovery and improved tagging for application containers and processes discovery.
+  description: |
+    Configure the Datadog Cluster Agent to enable integration autodiscovery and improved tagging for application containers and processes discovery.
+    This creates an additional instance that you can configure in the `Resource Config` tab of this tile. Set the number of instances to 0 if you want to disable it.
   properties:
   - name: cluster_agent_enabled
     type: selector
