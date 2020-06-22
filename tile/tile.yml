@@ -362,21 +362,25 @@ forms:
         configurable: false
         default: true
       - name: cluster_agent_bbs_url
+        configurable: true
         type: string
         label: URL of the BBS API
         default: https://bbs.service.cf.internal:8889
         description: URL of the BBS API.
       - name: cluster_agent_locket_api
+        configurable: true
         type: string
         label: Locket API location
         default: locket.service.cf.internal:8891
         description: Locket API location
       - name: cluster_agent_bbs_poll_interval
+        configurable: true
         type: integer
         label: Polling interval of the BBS API
         default: 15
         description: Interval for refreshing autodiscovery data from BBS API (in seconds).
       - name: cluster_agent_bbs_ca_crt
+        configurable: true
         type: ca_certificate
         label: PEM-encoded CA certificate
         description: |-
@@ -391,16 +395,19 @@ forms:
           PEM-encoded client certificate and private key for the BBS API communication.
           The automatic generation for this uses the OpsManager Root CA, which should be specified in the input above.
       - name: cluster_agent_warmup_duration
+        configurable: true
         type: integer
         label: Warmup duration
         default: 30
         description: Number of seconds to wait for Node agents to report before starting to dispatch configurations.
       - name: cluster_agent_log_level
+        configurable: true
         type: string
         label: Log level
         default: INFO
         description: Logging level for the cluster agent.
       - name: cluster_agent_token
+        configurable: true
         type: secret
         label: Authentification token
         constraints:
@@ -408,14 +415,11 @@ forms:
             error_message: 'This token must be at least 32 characters long'
         description: Token for Node Agent <-> Cluster Agent authentication. String of 32 characters or more.
       - name: cluster_agent_port
+        configurable: true
         type: port
         label: Cluster Agent port
         default: 5005
         description: Port on which the Cluster Agent can be reached by Node Agents.
-      - name: cluster_agent_enabled
-        type: boolean
-        configurable: false
-        defaut: true
 
 - name: cf-config
   label: Cloud Foundry Settings
