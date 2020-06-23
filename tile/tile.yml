@@ -368,7 +368,7 @@ forms:
         default: https://bbs.service.cf.internal:8889
         description: URL of the BBS API.
       - name: cluster_agent_locket_api
-        configurable: true
+        configurable: false  # Set to true when leader election is available
         type: string
         label: Locket API location
         default: locket.service.cf.internal:8891
