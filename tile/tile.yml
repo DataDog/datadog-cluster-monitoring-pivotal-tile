@@ -123,6 +123,29 @@ forms:
     label: App Metrics
     default: true
     description: Grab app container metrics (e.g. cpu and memory usage).
+  - name: enable_metadata_collection
+    type: boolean
+    label: Enable Metadata Collection
+    default: false
+    description: Collect application, space and organization labels and annotations to tag App Metrics.
+  - name: metadata_keys_whitelist_patterns
+    type: string_list
+    label: Metadata Whitelist
+    optional: true
+    description: |
+      Comma separated list of regular expressions.
+      Label and annotation keys that match any regular expression in this list are included.
+      If neither a whitelist nor a blacklist is provided, everything is included.
+      If a key matches both a whitelist and a blacklist pattern, it is excluded.
+  - name: metadata_keys_blacklist_patterns
+    type: string_list
+    label: Metadata Blacklist
+    optional: true
+    description: |
+      Comma separated list of regular expressions.
+      Label and annotation keys that match any regular expression in this list are excluded.
+      If neither a whitelist nor a blacklist is provided, everything is included.
+      If a key matches both a whitelist and a blacklist pattern, it is excluded.
   - name: num_workers
     type: integer
     label: Number of Worker Threads
@@ -379,21 +402,6 @@ forms:
         label: Polling interval of the BBS API
         default: 15
         description: Interval for refreshing autodiscovery data from BBS API (in seconds).
-      - name: cluster_agent_bbs_ca_crt
-        configurable: true
-        type: ca_certificate
-        label: PEM-encoded CA certificate
-        description: |-
-          PEM-encoded CA certificate for the BBS API communication.
-          Used to verify the identity specified in the input below.
-          Needs to be trusted by the BBS API server.
-      - name: cluster_agent_bbs_client_identity
-        configurable: true
-        type: rsa_cert_credentials
-        label: PEM-encoded client certificate and private key
-        description: |-
-          PEM-encoded client certificate and private key for the BBS API communication.
-          The automatic generation for this uses the OpsManager Root CA, which should be specified in the input above.
       - name: cluster_agent_warmup_duration
         configurable: true
         type: integer
@@ -432,6 +440,57 @@ forms:
         label: List of events to collect
         default: audit.app.restage,audit.app.update,audit.app.create,app.crash
         description: Comma separated list of Cloud Foundry audit events to collect.
+  - name: cluster_agent_bbs_auth_generation
+    type: selector
+    label: Automatically generate certificate and private key for BBS API communication when Cluster Agent is enabled
+    default: "Yes"
+    description: |
+      Whether or not to automatically generate a client certificate and private key to authenticate requests to the BBS API.
+      Selecting "Yes" uses the OpsManager Root CA, which needs to be trusted by the BBS API server.
+      Selecting "No" lets you specify your own CA, which needs to be trusted by the BBS API server, as well as the client certificate and private key.
+    option_templates:
+    - name: automatic_generation
+      select_value: "Yes"
+      property_blueprints:
+      - name: cluster_agent_bbs_client_identity
+        configurable: false
+        type: rsa_cert_credentials
+        label: PEM-encoded client certificate and private key
+        default:
+          domains:
+          - datadoghq.com
+      named_manifests:
+      - name: cluster_agent_bbs_ca_crt
+        manifest: (( $ops_manager.ca_certificate ))
+      - name: cluster_agent_bbs_client_key
+        manifest: (( .properties.cluster_agent_bbs_auth_generation.automatic_generation.cluster_agent_bbs_client_identity.private_key_pem ))
+      - name: cluster_agent_bbs_client_crt
+        manifest: (( .properties.cluster_agent_bbs_auth_generation.automatic_generation.cluster_agent_bbs_client_identity.cert_pem ))
+    - name: manual_generation
+      select_value: "No"
+      property_blueprints:
+      - name: cluster_agent_bbs_ca_crt
+        configurable: true
+        type: ca_certificate
+        label: PEM-encoded CA certificate
+        description: |-
+          PEM-encoded CA certificate for the BBS API communication.
+          Used to verify the identity specified in the input below.
+          Needs to be trusted by the BBS API server.
+      - name: cluster_agent_bbs_client_identity
+        configurable: true
+        type: rsa_cert_credentials
+        label: PEM-encoded client certificate and private key
+        description: |-
+          PEM-encoded client certificate and private key for the BBS API communication.
+          The automatic generation for this uses the OpsManager Root CA, which should be specified in the input above.
+      named_manifests:
+      - name: cluster_agent_bbs_ca_crt
+        manifest: (( .properties.cluster_agent_bbs_auth_generation.manual_generation.cluster_agent_bbs_ca_crt.value ))
+      - name: cluster_agent_bbs_client_key
+        manifest: (( .properties.cluster_agent_bbs_auth_generation.manual_generation.cluster_agent_bbs_client_identity.private_key_pem ))
+      - name: cluster_agent_bbs_client_crt
+        manifest: (( .properties.cluster_agent_bbs_auth_generation.manual_generation.cluster_agent_bbs_client_identity.cert_pem ))
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -513,6 +572,9 @@ packages:
           http_proxy_url: (( .properties.http_proxy_url.value ))
           https_proxy_url: (( .properties.https_proxy_url.value ))
           no_proxy: (( .properties.no_proxy.value ))
+          enable_metadata_collection: (( .properties.enable_metadata_collection.value ))
+          metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings ))
+          metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings ))
         uaa:
           client: (( .properties.uaa_client.value ))
           client_secret: (( .properties.uaa_secret.value ))
@@ -540,9 +602,9 @@ packages:
           bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
           locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
           bbs_poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_poll_interval.value ))
-          bbs_ca_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_ca_crt.value ))
-          bbs_client_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.cert_pem ))
-          bbs_client_key: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.private_key_pem ))
+          bbs_ca_crt: (( .properties.cluster_agent_bbs_auth_generation.selected_option.parsed_manifest(cluster_agent_bbs_ca_crt) ))
+          bbs_client_crt: (( .properties.cluster_agent_bbs_auth_generation.selected_option.parsed_manifest(cluster_agent_bbs_client_crt) ))
+          bbs_client_key: (( .properties.cluster_agent_bbs_auth_generation.selected_option.parsed_manifest(cluster_agent_bbs_client_key) ))
           warmup_duration: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_warmup_duration.value ))
           log_level: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_log_level.value ))
           token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
