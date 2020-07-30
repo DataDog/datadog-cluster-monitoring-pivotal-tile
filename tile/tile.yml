@@ -373,12 +373,20 @@ forms:
       - name: cluster_agent_enabled
         manifest: |
           false
+      - name: cluster_agent_link
+        manifest: |
+          {}
     - name: enabled_option
       select_value: "Yes"
       named_manifests:
       - name: cluster_agent_enabled
         manifest: |
           true
+      - name: cluster_agent_link
+        manifest: |
+          datadog-cluster-agent:
+            from: datadog-cluster-agent-link
+            deployment: (( ..datadog.deployment_name ))
       property_blueprints:
       - name: enabled_value
         type: boolean
@@ -611,10 +619,7 @@ runtime_configs:
         jobs:
         - name: dd-agent
           release: datadog-agent
-          consumes:
-            datadog-cluster-agent:
-              from: datadog-cluster-agent-link
-              deployment: (( ..datadog.deployment_name ))
+          consumes: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_link) ))
         properties:
           dd:
             skip_ssl_validation: (( .properties.skip_ssl_validation.value ))
