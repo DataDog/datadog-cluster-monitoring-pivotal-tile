@@ -567,7 +567,7 @@ packages:
         provides:
           datadog-cluster-agent:
             aliases:
-              - domain: datadog-cluster-agent.cf.internal
+              - domain: datadog-cluster-agent.(( ..datadog.deployment_name ))
       dynamic_ip: 1
       instances: 1
       properties:
@@ -675,3 +675,4 @@ runtime_configs:
             token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
             port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
             enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
+            address: datadog-cluster-agent.(( ..datadog.deployment_name ))
