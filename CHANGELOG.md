@@ -2,7 +2,7 @@
 
 ## 4.1.1 / 2020-09-21
 
-* [Fixed] Bump Datadog Agent Bosh Release to version 4.0.1]. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.0.1) for details.
+* [Fixed] Bump Datadog Agent Bosh Release to version 4.0.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.0.1) for details.
 
 This tile includes the following packages:
   * [Firehose Nozzle 80](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/80)
