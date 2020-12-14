@@ -21,8 +21,7 @@ forms:
 - name: datadog-config
   label: Datadog Config
   description: Datadog Configuration
-  markdown: This is common configuration to both the Datadog Firehose Nozzle and the
-    Datadog Agent
+  markdown: This is common configuration to both the Datadog Firehose Nozzle and the Datadog Agent
   properties:
   - name: api_key
     type: secret
@@ -57,8 +56,7 @@ forms:
 - name: additional-datadog-endpoints
   label: Additional Endpoints
   description: Additional Datadog Endpoints
-  markdown: This is common additional configuration to both the Datadog Firehose Nozzle
-    and the Datadog Agent
+  markdown: This is common additional configuration to both the Datadog Firehose Nozzle and the Datadog Agent
   properties:
   - name: additional_api_url_1
     type: string
@@ -118,8 +116,7 @@ forms:
   - name: metric_prefix
     type: string
     label: Metric Prefix
-    description: The metric prefix. Setting this to anything other than the default
-      will have billing implications.
+    description: The metric prefix. Setting this to anything other than the default will have billing implications.
     optional: true
   - name: app_metrics
     type: boolean
@@ -130,8 +127,7 @@ forms:
     type: boolean
     label: Enable Metadata Collection
     default: false
-    description: Collect application, space and organization labels and annotations
-      to tag App Metrics.
+    description: Collect application, space and organization labels and annotations to tag App Metrics.
   - name: metadata_keys_whitelist_patterns
     type: string_list
     label: Metadata Whitelist
@@ -178,8 +174,7 @@ forms:
   - name: api_batch_size
     type: integer
     label: Batch Sizes for V3 API
-    description: Size of batches in which to query V3 API to populate app cache (integer
-      between 100 and 5000)
+    description: Size of batches in which to query V3 API to populate app cache (integer between 100 and 5000)
     default: 500
     constraints:
       min: 100
@@ -214,14 +209,12 @@ forms:
     type: boolean
     label: Make Friendly Hostname unique
     default: false
-    description: Append the CloudFoundry deployment to the friendly hostname, to make
-      it unique.
+    description: Append the CloudFoundry deployment to the friendly hostname, to make it unique.
   - name: cf_os_hostname_aliasing
     type: boolean
     label: Send OS Hostname alias
     default: false
-    description: If enabled, send the OS hostname as an alias. Useful in coordination
-      with the Friendly Hostname option.
+    description: If enabled, send the OS hostname as an alias. Useful in coordination with the Friendly Hostname option.
   - name: process_agent_enabled
     label: Enable Process Agent
     type: boolean
@@ -321,8 +314,7 @@ forms:
     label: Strip process arguments
     type: boolean
     default: false
-    description: This setting will strip the process arguments from the processes
-      sent by the process agent.
+    description: This setting will strip the process arguments from the processes sent by the process agent.
   - name: secret_backend_command
     label: Secret backend command
     optional: true
@@ -347,8 +339,7 @@ forms:
     label: Datadog Cluster Agent poll interval
     type: integer
     default: 10
-    description: How often to poll the Datadog Cluster Agent for new integration configurations
-      (in seconds).
+    description: How often to poll the Datadog Cluster Agent for new integration configurations (in seconds).
 
 - name: disk-check-config
   label: Disk integration configuration
@@ -442,8 +433,7 @@ forms:
         optional: true
         configurable: true
         type: rsa_cert_credentials
-        label: PEM-encoded client certificate and private key (leave both fields blank
-          to fill automatically)
+        label: PEM-encoded client certificate and private key (leave both fields blank to fill automatically)
         description: |-
           PEM-encoded client certificate and private key for the BBS API communication.
           The automatic generation for this uses the OpsManager Root CA, which should be specified in the input above.
@@ -452,8 +442,7 @@ forms:
         type: integer
         label: Warmup duration
         default: 30
-        description: Number of seconds to wait for Node agents to report before starting
-          to dispatch configurations.
+        description: Number of seconds to wait for Node agents to report before starting to dispatch configurations.
       - name: cluster_agent_log_level
         configurable: true
         type: string
@@ -467,8 +456,7 @@ forms:
         constraints:
         - must_match_regex: '^.{32,}$'
           error_message: 'This token must be at least 32 characters long'
-        description: Token for Node Agent <-> Cluster Agent authentication. String
-          of 32 characters or more.
+        description: Token for Node Agent <-> Cluster Agent authentication. String of 32 characters or more.
       - name: cluster_agent_port
         configurable: true
         type: port
@@ -480,8 +468,7 @@ forms:
         type: boolean
         label: Enable Cloud Foundry API Integration
         default: false
-        description: Whether or not to enable and configure the Cloud Foundry API
-          integration to collect audit events.
+        description: Whether or not to enable and configure the Cloud Foundry API integration to collect audit events.
       - name: cloud_foundry_api_check_event_filter
         configurable: true
         type: string_list
@@ -506,8 +493,7 @@ forms:
     type: boolean
     label: Skip SSL validation
     default: false
-    description: Skip SSL validation (to allow things like self-signed certs). Do
-      not set to true in production.
+    description: Skip SSL validation (to allow things like self-signed certs). Do not set to true in production.
   - name: disable_access_control
     type: boolean
     label: Disable Access Control
@@ -516,8 +502,7 @@ forms:
   - name: uaa_client
     type: string
     label: UAA Client
-    description: UAA client (a user having both "cloud_controller.admin_read_only"
-      and "doppler.firehose")
+    description: UAA client (a user having both "cloud_controller.admin_read_only" and "doppler.firehose")
     optional: false
   - name: uaa_secret
     type: secret
@@ -528,8 +513,7 @@ forms:
     type: string
     label: Firehose subscription id
     default: datadog-firehose-subscription-id
-    description: Subscription id unique to nozzle; firehose balances across socket
-      connections having same id.
+    description: Subscription id unique to nozzle; firehose balances across socket connections having same id.
 
 packages:
 - name: datadog-firehose-nozzle-release
@@ -568,17 +552,13 @@ packages:
         app_metrics: (( .properties.app_metrics.value ))
         num_workers: (( .properties.num_workers.value ))
         grab_interval: (( .properties.grab_interval.value ))
-        org_data_collection_interval: (( .properties.org_data_collection_interval.value
-          ))
+        org_data_collection_interval: (( .properties.org_data_collection_interval.value ))
         http_proxy_url: (( .properties.http_proxy_url.value ))
         https_proxy_url: (( .properties.https_proxy_url.value ))
         no_proxy: (( .properties.no_proxy.value ))
-        enable_metadata_collection: (( .properties.enable_metadata_collection.value
-          ))
-        metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings
-          ))
-        metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings
-          ))
+        enable_metadata_collection: (( .properties.enable_metadata_collection.value ))
+        metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings ))
+        metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings ))
       uaa:
         client: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
@@ -603,36 +583,23 @@ packages:
     instances: 1
     properties:
       cluster_agent:
-        bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value
-          ))
-        locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value
-          ))
-        bbs_poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_poll_interval.value
-          ))
-        bbs_ca_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_ca_crt.value
-          || $ops_manager.ca_certificate ))
-        bbs_client_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.cert_pem
-          || .properties.cluster_agent_bbs_client_identity.cert_pem ))
-        bbs_client_key: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.private_key_pem
-          || .properties.cluster_agent_bbs_client_identity.private_key_pem ))
-        warmup_duration: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_warmup_duration.value
-          ))
-        log_level: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_log_level.value
-          ))
-        token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value
-          ))
-        port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value
-          ))
-        enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled)
-          ))
-        enable_cloud_foundry_api_check: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_check.value
-          ))
+        bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
+        locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
+        bbs_poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_poll_interval.value ))
+        bbs_ca_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_ca_crt.value || $ops_manager.ca_certificate ))
+        bbs_client_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.cert_pem || .properties.cluster_agent_bbs_client_identity.cert_pem ))
+        bbs_client_key: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.private_key_pem || .properties.cluster_agent_bbs_client_identity.private_key_pem ))
+        warmup_duration: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_warmup_duration.value ))
+        log_level: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_log_level.value ))
+        token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
+        port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
+        enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
+        enable_cloud_foundry_api_check: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_check.value ))
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
         client_id: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
-        event_filter: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_check_event_filter.parsed_strings
-          ))
+        event_filter: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_check_event_filter.parsed_strings ))
         tags: (( .properties.tags.parsed_strings ))
         skip_ssl_validation: (( .properties.insecure_ssl_skip_verify.value ))
         https_proxy: (( .properties.https_proxy_url.value ))
@@ -681,8 +648,7 @@ runtime_configs:
           additional_api_key_5: (( .properties.additional_api_key_5.value ))
           additional_api_url_5: (( .properties.additional_api_url_5.value ))
           friendly_hostname: (( .properties.use_friendly_hostname.value ))
-          unique_friendly_hostname: (( .properties.unique_friendly_hostname.value
-            ))
+          unique_friendly_hostname: (( .properties.unique_friendly_hostname.value ))
           cf_os_hostname_aliasing: (( .properties.cf_os_hostname_aliasing.value ))
           tags: (( .properties.tags.value ))
           proxy:
@@ -695,18 +661,13 @@ runtime_configs:
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
-          generate_monit_processes: (( .properties.generate_monit_processes.value
-            ))
-          generate_system_processes: (( .properties.generate_system_processes.value
-            ))
+          generate_monit_processes: (( .properties.generate_monit_processes.value ))
+          generate_system_processes: (( .properties.generate_system_processes.value ))
           generate_ntp_config: (( .properties.generate_ntp_config.value ))
-          generate_ntp_config_host: (( .properties.generate_ntp_config_host.value
-            ))
+          generate_ntp_config_host: (( .properties.generate_ntp_config_host.value ))
           generate_disk_config: (( .properties.generate_disk_config.value ))
-          generate_disk_config_tag_by_filesystem: (( .properties.generate_disk_config_tag_by_filesystem.value
-            ))
-          generate_disk_config_all_partitions: (( .properties.generate_disk_config_all_partitions.value
-            ))
+          generate_disk_config_tag_by_filesystem: (( .properties.generate_disk_config_tag_by_filesystem.value ))
+          generate_disk_config_all_partitions: (( .properties.generate_disk_config_all_partitions.value ))
           disk_yaml_config: (( .properties.disk_yaml_config.value ))
           enable_gohai: (( .properties.enable_gohai.value ))
           check_runners: (( .properties.check_runners.value ))
@@ -717,18 +678,12 @@ runtime_configs:
           enable_logs_agent: (( .properties.logs_enabled.value ))
           strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
           secret_backend_command: (( .properties.secret_backend_command.value ))
-          secret_backend_arguments: (( .properties.secret_backend_arguments.parsed_strings
-            ))
-          secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value
-            ))
+          secret_backend_arguments: (( .properties.secret_backend_arguments.parsed_strings ))
+          secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value ))
           secret_backend_timeout: (( .properties.secret_backend_timeout.value ))
-          cluster_agent_poll_interval: (( .properties.cluster_agent_poll_interval.value
-            ))
+          cluster_agent_poll_interval: (( .properties.cluster_agent_poll_interval.value ))
         cluster_agent:
-          token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value
-            ))
-          port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value
-            ))
-          enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled)
-            ))
+          token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
+          port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
+          enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
           address: datadog-cluster-agent.(( ..datadog.deployment_name ))
