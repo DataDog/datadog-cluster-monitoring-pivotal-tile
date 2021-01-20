@@ -30,8 +30,25 @@ forms:
   - name: api_url
     type: string
     label: Datadog API URL
-    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
-    default: https://app.datadoghq.com
+    optional: true
+    description: |
+      The host to send metrics to (e.g. https://app.datadoghq.com).
+      Use this if you need the Datadog Agent to send to a custom URL, otherwise use the `site` property below.
+  - name: site
+    type: string
+    label: Datadog API site
+    optional: true
+    description: |
+      The site of the Datadog intake to send Agent data to. Set to `datadoghq.eu` to send data to the EU site.
+      If unset, it defaults do `datadoghq.com`.
+      If you set a URL in the field above, setting the site has no effect, so empty it if you want to use site.
+  - name: nozzle_api_url
+    type: string
+    optional: true
+    label: Datadog API URL for Nozzle
+    description: |
+      The host of the Datadog intake server for the nozzle to send data to (e.g. https://app.datadoghq.com).
+      If not specified, the `Datadog API URL` in the field above will be used.
   - name: tags
     type: string_list
     label: Tags
@@ -529,7 +546,7 @@ packages:
     properties:
       datadog:
         api_key: (( .properties.api_key.value ))
-        api_url: (( .properties.api_url.value ))
+        api_url: (( .properties.nozzle_api_url.value || .properties.api_url.value ))
         additional_api_key_1: (( .properties.additional_api_key_1.value ))
         additional_api_url_1: (( .properties.additional_api_url_1.value ))
         additional_api_key_2: (( .properties.additional_api_key_2.value ))
@@ -656,6 +673,7 @@ runtime_configs:
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
           url: (( .properties.api_url.value ))
+          site: (( .properties.site.value ))
           use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
