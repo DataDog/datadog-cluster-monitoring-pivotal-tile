@@ -643,7 +643,11 @@ runtime_configs:
         - os: centos-7
       exclude:
         jobs:
+        # Exclude kubernetes workers
         - name: kubelet
+          release: kubo
+        # Exclude kubernetes masters
+        - name: kube_scheduler
           release: kubo
       jobs:
       - name: dd-agent
