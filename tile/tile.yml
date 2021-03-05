@@ -218,7 +218,7 @@ forms:
     default: true
     description: |
       Generate a friendly hostname for the host, in the form `<INSTANCE_NAME>-<INSTANCE_INDEX>`.
-      Check one or both of the options below (`Append VM UUID to friendly hostname` or `Make Friendly Hostname unique`) to generate unique hostnames if you have several foundations with same deployments and/or several deployments with same VM instances.
+      Check one or both of the options below (`Append VM UUID to friendly hostname` or `Make Friendly Hostname unique`) to generate unique hostnames if you have several foundations with the same deployments and/or several deployments with the same VM instances.
   - name: unique_friendly_hostname
     type: boolean
     label: Make Friendly Hostname unique
