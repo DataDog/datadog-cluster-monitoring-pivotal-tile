@@ -631,7 +631,7 @@ packages:
         https_proxy: (( .properties.https_proxy_url.value ))
         http_proxy: (( .properties.http_proxy_url.value ))
         no_proxy: (( .properties.no_proxy.parsed_strings ))
-      cloud_foundry_api:
+      cloud_foundry_bbs:
         env_include: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_include.parsed_strings))
         env_exclude: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_exclude.parsed_strings))
 
