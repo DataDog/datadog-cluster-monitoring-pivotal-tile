@@ -211,22 +211,28 @@ forms:
     label: Use UUID Hostname
     default: false
     description: |
-      By default we use a friendly hostname, this might cause problems with some setups. Set this to use the UUID instead.
-      In an environment where there are multiple hosts of the same type on different deployments or in different foundries, this will be necessary.
-      If dd.hostname is set, it will take precedence over the uuid hostname.
+      Use the Bosh VM UUID as the hostname.
   - name: use_friendly_hostname
     type: boolean
     label: Use Friendly Hostname
     default: true
     description: |
-      By default we use a friendly hostname, this might cause problems with some setups.
-      If you set the UUID hostname to true, it will supercede this one.
-      If you set both to false, the agent will detect the underlying hostname and use that instead.
+      Generate a friendly hostname for the host, in the form `<INSTANCE_NAME>-<INSTANCE_INDEX>`.
+      Check one or both of the options below to generate unique hostnames if you have several foundations with same deployments and/or several deployments with same VM instances.
   - name: unique_friendly_hostname
     type: boolean
     label: Make Friendly Hostname unique
     default: false
-    description: Append the CloudFoundry deployment to the friendly hostname, to make it unique.
+    description: |
+      Append the CloudFoundry deployment to the friendly hostname, to make it unique across deployments.
+      If you have several foundations and the deployments across your foundations are not unique, check the option below instead.
+  - name: friendly_hostname_append_vm_guid
+    type: boolean
+    label: Append VM UUID to friendly hostname
+    default: false
+    description: |
+      Append the CloudFoundry VM UUID to the friendly hostname, to make it unique.
+      Set this to `true` to generate unique friendly hostnames across your entire Cloud Foundry environment.
   - name: cf_os_hostname_aliasing
     type: boolean
     label: Send OS Hostname alias
@@ -670,6 +676,7 @@ runtime_configs:
           additional_api_url_5: (( .properties.additional_api_url_5.value ))
           friendly_hostname: (( .properties.use_friendly_hostname.value ))
           unique_friendly_hostname: (( .properties.unique_friendly_hostname.value ))
+          friendly_hostname_append_vm_guid: (( .properties.friendly_hostname_append_vm_guid.value ))
           cf_os_hostname_aliasing: (( .properties.cf_os_hostname_aliasing.value ))
           tags: (( .properties.tags.value ))
           proxy:
@@ -742,6 +749,7 @@ runtime_configs:
           additional_api_key_5: (( .properties.additional_api_key_5.value ))
           additional_api_url_5: (( .properties.additional_api_url_5.value ))
           friendly_hostname: (( .properties.use_friendly_hostname.value ))
+          friendly_hostname_append_vm_guid: (( .properties.friendly_hostname_append_vm_guid.value ))
           unique_friendly_hostname: (( .properties.unique_friendly_hostname.value ))
           cf_os_hostname_aliasing: (( .properties.cf_os_hostname_aliasing.value ))
           tags: (( .properties.tags.value ))
