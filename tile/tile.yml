@@ -494,12 +494,12 @@ forms:
         description: Comma separated list of Cloud Foundry audit events to collect.
       - name: cloud_foundry_bbs_env_include
         type: string_list
-        label: Env Variables Include List
+        label: Application environment variables include patterns
         optional: true
         description: List of regular expressions to allow a set of environment variables to be included as container tags.
       - name: cloud_foundry_bbs_env_exclude
         type: string_list
-        label: Env Variables Exclude List
+        label: Application environment variables exclude patterns
         description: List of regular expressions to forbid a set of environment variables to be included as container tags.
 
 - name: cf-config
@@ -631,6 +631,9 @@ packages:
         https_proxy: (( .properties.https_proxy_url.value ))
         http_proxy: (( .properties.http_proxy_url.value ))
         no_proxy: (( .properties.no_proxy.parsed_strings ))
+      cloud_foundry_api:
+        env_include: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_include.parsed_strings))
+        env_exclude: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_exclude.parsed_strings))
 
 - name: datadog-agent-boshrelease
   type: bosh-release
