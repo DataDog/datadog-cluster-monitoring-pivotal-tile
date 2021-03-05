@@ -218,14 +218,14 @@ forms:
     default: true
     description: |
       Generate a friendly hostname for the host, in the form `<INSTANCE_NAME>-<INSTANCE_INDEX>`.
-      Check one or both of the options below to generate unique hostnames if you have several foundations with same deployments and/or several deployments with same VM instances.
+      Check one or both of the options below (`Append VM UUID to friendly hostname` or `Make Friendly Hostname unique`) to generate unique hostnames if you have several foundations with same deployments and/or several deployments with same VM instances.
   - name: unique_friendly_hostname
     type: boolean
     label: Make Friendly Hostname unique
     default: false
     description: |
       Append the CloudFoundry deployment to the friendly hostname, to make it unique across deployments.
-      If you have several foundations and the deployments across your foundations are not unique, check the option below instead.
+      If you have several foundations and the deployments across your foundations are not unique, check the option below (`Append VM UUID to friendly hostname`)  instead.
   - name: friendly_hostname_append_vm_guid
     type: boolean
     label: Append VM UUID to friendly hostname
