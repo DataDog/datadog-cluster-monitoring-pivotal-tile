@@ -243,6 +243,11 @@ forms:
     type: boolean
     default: true
     description: Enable the process agent.
+  - name: process_agent_containers_only
+    label: Enable container collection only
+    type: boolean
+    default: false
+    description: Enable only the container collection of the process agent. Processes are not collected.
   - name: system_probe_enabled
     label: Enable System Probe
     type: boolean
@@ -699,6 +704,7 @@ runtime_configs:
           site: (( .properties.site.value ))
           use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
+          process_agent_containers_only: (( .properties.process_agent_containers_only.value ))
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
@@ -773,6 +779,7 @@ runtime_configs:
           site: (( .properties.site.value ))
           use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
+          process_agent_containers_only: (( .properties.process_agent_containers_only.value ))
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
