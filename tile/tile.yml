@@ -642,7 +642,7 @@ packages:
         enable_cloud_foundry_api_apps_polling: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_apps_polling.value ))
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
-        poll_interval: (( .properties.cloud_foundry_api_poll_interval.value ))
+        poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_poll_interval.value ))
         client_id: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
         event_filter: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_check_event_filter.parsed_strings ))
