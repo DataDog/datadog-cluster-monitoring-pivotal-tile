@@ -486,6 +486,18 @@ forms:
         label: Cluster Agent port
         default: 5005
         description: Port on which the Cluster Agent can be reached by Node Agents.
+      - name: enable_cloud_foundry_api_apps_polling
+        configurable: true
+        type: boolean
+        label: Enable Cloud Foundry API apps polling
+        default: false
+        description: Whether or not to poll the apps endpoint of the Cloud Foundry API for improved tagging functionality of containers.
+      - name: cloud_foundry_api_poll_interval
+        configurable: true
+        type: integer
+        label: Polling interval of the Cloud Foundry API
+        default: 60
+        description: Polling rate of CC API, in seconds. Low values might influence performance of other operations in the cluster.
       - name: enable_cloud_foundry_api_check
         configurable: true
         type: boolean
@@ -627,8 +639,10 @@ packages:
         port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
         enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
         enable_cloud_foundry_api_check: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_check.value ))
+        enable_cloud_foundry_api_apps_polling: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_apps_polling.value ))
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
+        poll_interval: (( .properties.cloud_foundry_api_poll_interval.value ))
         client_id: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
         event_filter: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_check_event_filter.parsed_strings ))
