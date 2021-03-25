@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.5.0 / 2021-03-25
+
+* [Added] Add option to append VM UUID to generated friendly hostnames. See [#39](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/39).
+* [Added] Add TKGI kubernetes control plane monitoring. See [#38](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/38).
+* [Fixed] Properly exclude kubernetes service instances in the placement rules. See [#37](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/37).
+* [Added] Bump Datadog Agent Bosh Release to version 4.4.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.4.0) for details.
+
+This tile includes the following packages:
+  * [Firehose Nozzle 80](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/80)
+  * [Datadog Agent Bosh Release 4.4.0](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.4.0)
+  * [Datadog Cluster Agent Bosh Release 1.5.0](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.5.0)
+
 ## 4.4.0 / 2021-01-21
 
 * [Fixed] Add field for customizing API site and properly sending data to other Datadog regions. See [#35](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/35).
