@@ -499,11 +499,14 @@ forms:
         default: audit.app.restage,audit.app.update,audit.app.create,app.crash
         description: Comma separated list of Cloud Foundry audit events to collect.
       - name: cloud_foundry_bbs_env_include
+        optional: true
+        configurable: true
         type: string_list
         label: Application environment variables include patterns
-        optional: true
         description: List of regular expressions to allow a set of environment variables to be included as container tags.
       - name: cloud_foundry_bbs_env_exclude
+        optional: true
+        configurable: true
         type: string_list
         label: Application environment variables exclude patterns
         description: List of regular expressions to forbid a set of environment variables to be included as container tags.
