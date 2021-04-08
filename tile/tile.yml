@@ -27,13 +27,6 @@ forms:
     type: secret
     label: Datadog API Key
     description: Your Datadog API Key
-  - name: api_url
-    type: string
-    label: Datadog API URL
-    optional: true
-    description: |
-      The host to send metrics to (e.g. https://app.datadoghq.com).
-      Use this if you need the Datadog Agent to send to a custom URL, otherwise use the `site` property below.
   - name: site
     type: string
     label: Datadog API site
@@ -41,14 +34,42 @@ forms:
     description: |
       The site of the Datadog intake to send Agent data to. Set to `datadoghq.eu` to send data to the EU site.
       If unset, it defaults do `datadoghq.com`.
-      If you set a URL in the field above, setting the site has no effect, so empty it if you want to use site.
+      If you set a URL in any of the "API URL" fields below, setting the site has no effect for that specific component, so empty it if you want to use site.
   - name: nozzle_api_url
     type: string
     optional: true
     label: Datadog API URL for Nozzle
     description: |
       The host of the Datadog intake server for the nozzle to send data to (e.g. https://app.datadoghq.com).
-      If not specified, the `Datadog API URL` in the field above will be used.
+      If not specified, the `Datadog API URL for metrics` in the field below will be used.
+  - name: api_url
+    type: string
+    label: Datadog API URL for metrics
+    optional: true
+    description: |
+      The host to send metrics to (e.g. https://app.datadoghq.com).
+      Use this if you need the Datadog Agent to send metrics to a custom URL, otherwise use the `site` property above.
+  - name: process_dd_url
+    type: string
+    label: Datadog API URL for process data
+    optional: true
+    description: |
+      The host to send process data to (e.g. https://process.datadoghq.com).
+      Use this if you need the Datadog Agent to send process data to a custom URL, otherwise use the `site` property above.
+  - name: apm_dd_url
+    type: string
+    label: Datadog API URL for APM data
+    optional: true
+    description: |
+      The host to send APM data to (e.g. https://trace.agent.datadoghq.com).
+      Use this if you need the Datadog Agent to send APM data to a custom URL, otherwise use the `site` property above.
+  - name: logs_dd_url
+    type: string
+    label: Datadog API URL for logs
+    optional: true
+    description: |
+      The host to send logs to (e.g. https://agent-http-intake.logs.datadoghq.com).
+      Use this if you need the Datadog Agent to send logs to a custom URL, otherwise use the `site` property above.
   - name: tags
     type: string_list
     label: Tags
@@ -718,6 +739,9 @@ runtime_configs:
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
           url: (( .properties.api_url.value ))
+          process_dd_url: (( .properties.process_dd_url.value ))
+          apm_dd_url: (( .properties.apm_dd_url.value ))
+          logs_dd_url: (( .properties.logs_dd_url.value ))
           site: (( .properties.site.value ))
           use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
@@ -793,6 +817,9 @@ runtime_configs:
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
           url: (( .properties.api_url.value ))
+          process_dd_url: (( .properties.process_dd_url.value ))
+          apm_dd_url: (( .properties.apm_dd_url.value ))
+          logs_dd_url: (( .properties.logs_dd_url.value ))
           site: (( .properties.site.value ))
           use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
