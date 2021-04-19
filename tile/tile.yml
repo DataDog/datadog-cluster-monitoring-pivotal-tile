@@ -90,6 +90,11 @@ forms:
     optional: true
     label: No Proxy
     description: Set urls that should skip the proxy, separated by a comma (e.g. datadoghq.com,google.com,example.engineering)
+  - name: no_proxy_nonexact_match
+    type: boolean
+    optional: true
+    label: No Proxy non exact match
+    description: In the Datadog Agent, enable more flexible no_proxy matching.
 
 - name: additional-datadog-endpoints
   label: Additional Endpoints
@@ -738,6 +743,7 @@ runtime_configs:
             http: (( .properties.http_proxy_url.value ))
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
+          no_proxy_nonexact_match: (( .properties.no_proxy_nonexact_match.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
@@ -816,6 +822,7 @@ runtime_configs:
             http: (( .properties.http_proxy_url.value ))
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
+          no_proxy_nonexact_match: (( .properties.no_proxy_nonexact_match.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
