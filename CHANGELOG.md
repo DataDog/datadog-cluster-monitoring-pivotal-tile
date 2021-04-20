@@ -12,8 +12,8 @@
 
 This tile includes the following packages:
   * [Firehose Nozzle 80](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/80)
-  * [Datadog Agent Bosh Release 4.4.1](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.4.1)
-  * [Datadog Cluster Agent Bosh Release 1.5.0](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.5.0)
+  * [Datadog Agent Bosh Release 4.5.0](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.5.0)
+  * [Datadog Cluster Agent Bosh Release 1.6.0](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.6.0)
 
 ## 4.5.0 / 2021-03-25
 
