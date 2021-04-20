@@ -1,5 +1,20 @@
 # Changelog
 
+## 4.6.0 / 2021-04-20
+
+* [Added] Add `no_proxy_nonexact_match` configuration option. See [#47](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/47).
+* [Added] Add inputs to configure custom URLs for process, APM and logs. See [#46](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/46).
+* [Added] Add option to send application environment variables as custom container tags. See [#45](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/45).
+* [Added] Add option to poll Cloud Foundry API for more advanced container tagging. See [#42](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/42).
+* [Added] Add option to collect containers only with the Process Agent. See [#41](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/41).
+* [Added] Bump Datadog Agent Bosh Release to version 4.5.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.5.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 1.6.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.6.0) for details.
+
+This tile includes the following packages:
+  * [Firehose Nozzle 80](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/80)
+  * [Datadog Agent Bosh Release 4.4.1](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.4.1)
+  * [Datadog Cluster Agent Bosh Release 1.5.0](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.5.0)
+
 ## 4.5.0 / 2021-03-25
 
 * [Added] Add option to append VM UUID to generated friendly hostnames. See [#39](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/39).
