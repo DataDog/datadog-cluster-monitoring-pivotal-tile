@@ -593,6 +593,209 @@ forms:
     default: datadog-firehose-subscription-id
     description: Subscription id unique to nozzle; firehose balances across socket connections having same id.
 
+- name: inclusion-rules
+  label: Inclusion placement Rules
+  description: Datadog Agent inclusion placement rules
+  markdown: See [Bosh documentation for placement rules](https://bosh.io/docs/runtime-config/#placement-rules). This form configures the `include` rules.
+  properties:
+    - name: include_stemcell
+      type: collection
+      label: Stemcell inclusion rules
+      description: Default is to target only and all linux VMs, windows is not supported.
+      configurable: true
+      default:
+        - os: ubuntu-xenial
+        - os: ubuntu-trusty
+        - os: centos-7
+      property_blueprints:
+        - name: os
+          type: string
+          configurable: true
+          label: OS to match
+      named_manifests:
+        - name: stemcell
+          manifest: |
+            os: (( current_record.os.value ))
+    - name: include_deployments
+      label: Deployments inclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: deployment
+          type: string
+          configurable: true
+          label: Deployment to match
+      named_manifests:
+        - name: deployments
+          manifest: (( current_record.deployment.value ))
+    - name: include_jobs
+      type: collection
+      label: Jobs inclusion rules
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: name
+          type: string
+          configurable: true
+          label: Name of the job to match
+        - name: release
+          type: string
+          configurable: true
+          label: Release to match
+      named_manifests:
+        - name: jobs
+          manifest: |
+            name: (( current_record.name.value ))
+            release: (( current_record.release.value ))
+    - name: include_instance_groups
+      label: Instance Groups inclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: instance_group
+          type: string
+          configurable: true
+          label: Instance group to match
+      named_manifests:
+        - name: instance_groups
+          manifest: (( current_record.instance_group.value ))
+    - name: include_networks
+      label: Networks inclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: network
+          type: string
+          configurable: true
+          label: Network to match
+      named_manifests:
+        - name: networks
+          manifest: (( current_record.network.value ))
+    - name: include_teams
+      label: Teams inclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: team
+          type: string
+          configurable: true
+          label: Team to match
+      named_manifests:
+        - name: teams
+          manifest: (( current_record.team.value ))
+    - name: include_lifecycle
+      label: Lifecyle inclusion rule
+      type: string
+      optional: true
+      configurable: true
+
+- name: exclusion-rules
+  label: Exclusion placement Rules
+  description: Datadog Agent exclusion placement rules
+  markdown: See [Bosh documentation for placement rules](https://bosh.io/docs/runtime-config/#placement-rules). This form configures the `exclude` rules.
+  properties:
+    - name: exclude_stemcell
+      type: collection
+      label: Stemcell exclusion rules
+      configurable: true
+      optional: true
+      property_blueprints:
+        - name: os
+          type: string
+          configurable: true
+          label: OS to match
+      named_manifests:
+        - name: stemcell
+          manifest: |
+            os: (( current_record.os.value ))
+    - name: exclude_deployments
+      label: Deployments exclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: deployment
+          type: string
+          configurable: true
+          label: Deployment to match
+      named_manifests:
+        - name: deployments
+          manifest: (( current_record.deployment.value ))
+    - name: exclude_jobs
+      type: collection
+      label: Jobs exclusion rules
+      description: |
+        Default is to exclude both `kube-scheduler` and `kubelet` jobs of the `kubo` release to avoid installing on kubernetes instances if the TKGI tile is installed.
+        Another Datadog Agent addon already gets installed on TKGI VMs via this tile.
+      default:
+        - name: kube-scheduler
+          release: kubo
+        - name: kubelet
+          release: kubo
+      configurable: true
+      property_blueprints:
+        - name: name
+          type: string
+          configurable: true
+          label: Name of the job to match
+        - name: release
+          type: string
+          configurable: true
+          label: Release to match
+      named_manifests:
+        - name: jobs
+          manifest: |
+            name: (( current_record.name.value ))
+            release: (( current_record.release.value ))
+    - name: exclude_instance_groups
+      label: Instance Groups exclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: instance_group
+          type: string
+          configurable: true
+          label: Instance group to match
+      named_manifests:
+        - name: instance_groups
+          manifest: (( current_record.instance_group.value ))
+    - name: exclude_networks
+      label: Networks exclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: network
+          type: string
+          configurable: true
+          label: Network to match
+      named_manifests:
+        - name: networks
+          manifest: (( current_record.network.value ))
+    - name: exclude_teams
+      label: Teams exclusion rules
+      type: collection
+      optional: true
+      configurable: true
+      property_blueprints:
+        - name: team
+          type: string
+          configurable: true
+          label: Team to match
+      named_manifests:
+        - name: teams
+          manifest: (( current_record.team.value ))
+    - name: exclude_lifecycle
+      label: Lifecyle exclusion rule
+      type: string
+      optional: true
+      configurable: true
+
 packages:
 - name: datadog-firehose-nozzle-release
   type: bosh-release
@@ -703,18 +906,21 @@ runtime_configs:
     addons:
     - name: datadog
       include:
-        stemcell:
-        - os: ubuntu-xenial
-        - os: ubuntu-trusty
-        - os: centos-7
+        stemcell: (( .properties.include_stemcell.parsed_manifest(stemcell) ))
+        deployments: (( .properties.include_deployments.parsed_manifest(deployments) ))
+        jobs: (( .properties.include_jobs.parsed_manifest(jobs) ))
+        instance_groups: (( .properties.include_instance_groups.parsed_manifest(instance_groups) ))
+        networks: (( .properties.include_networks.parsed_manifest(networks) ))
+        teams: (( .properties.include_teams.parsed_manifest(teams) ))
+        lifecycle: (( .properties.include_lifecycle.value || "" ))
       exclude:
-        jobs:
-        # Exclude kubernetes workers
-        - name: kubelet
-          release: kubo
-        # Exclude kubernetes masters
-        - name: kube-scheduler
-          release: kubo
+        stemcell: (( .properties.exclude_stemcell.parsed_manifest(stemcell) ))
+        deployments: (( .properties.exclude_deployments.parsed_manifest(deployments) ))
+        jobs: (( .properties.exclude_jobs.parsed_manifest(jobs) ))
+        instance_groups: (( .properties.exclude_instance_groups.parsed_manifest(instance_groups) ))
+        networks: (( .properties.exclude_networks.parsed_manifest(networks) ))
+        teams: (( .properties.exclude_teams.parsed_manifest(teams) ))
+        lifecycle: (( .properties.exclude_lifecycle.value || "" ))
       jobs:
       - name: dd-agent
         release: datadog-agent
