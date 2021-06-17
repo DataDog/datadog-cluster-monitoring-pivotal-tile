@@ -474,6 +474,12 @@ forms:
         label: Polling interval of the BBS API
         default: 15
         description: Interval for refreshing autodiscovery data from BBS API (in seconds).
+      - name: cluster_agent_ulimit_files
+        configurable: true
+        type: integer
+        label: The limit of open file descriptors for the cluster agent process. Increase if you have a large number of VMs in your environmnent, to allow more HTTP connections to the cluster agent API.
+        default: 1024
+        description: Interval for refreshing autodiscovery data from BBS API (in seconds).
       - name: cluster_agent_bbs_ca_crt
         optional: true
         configurable: true
@@ -867,6 +873,7 @@ packages:
         bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
         locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
         bbs_poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_poll_interval.value ))
+        ulimit_files: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_ulimit_files.value ))
         bbs_ca_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_ca_crt.value || $ops_manager.ca_certificate ))
         bbs_client_crt: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.cert_pem || .properties.cluster_agent_bbs_client_identity.cert_pem ))
         bbs_client_key: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_client_identity.private_key_pem || .properties.cluster_agent_bbs_client_identity.private_key_pem ))
