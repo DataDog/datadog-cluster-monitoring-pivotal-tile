@@ -535,6 +535,12 @@ forms:
         label: Polling interval of the Cloud Foundry API
         default: 60
         description: Polling rate of CC API, in seconds. Low values might influence performance of other operations in the cluster.
+      - name: cloud_foundry_api_apps_batch_size
+        configurable: true
+        type: integer
+        label: Number of apps per page to collect when calling the list apps endpoint of the CC API. Max 5000.
+        default: 5000
+        description: Polling rate of CC API, in seconds. Low values might influence performance of other operations in the cluster.
       - name: enable_cloud_foundry_api_check
         configurable: true
         type: boolean
@@ -887,6 +893,7 @@ packages:
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
         poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_poll_interval.value ))
+        apps_batch_size: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_apps_batch_size.value ))
         client_id: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
         event_filter: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_check_event_filter.parsed_strings ))
