@@ -538,9 +538,9 @@ forms:
       - name: cloud_foundry_api_apps_batch_size
         configurable: true
         type: integer
-        label: Number of apps per page to collect when calling the list apps endpoint of the CC API. Max 5000.
+        label: Batch size of CC API list applications endpoint
         default: 5000
-        description: Polling rate of CC API, in seconds. Low values might influence performance of other operations in the cluster.
+        description: Number of apps per page to collect when calling the list apps endpoint of the CC API. Max 5000.
       - name: enable_cloud_foundry_api_check
         configurable: true
         type: boolean
