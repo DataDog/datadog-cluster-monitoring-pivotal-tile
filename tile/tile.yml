@@ -95,6 +95,11 @@ forms:
     optional: true
     label: No Proxy non exact match
     description: In the Datadog Agent, enable more flexible no_proxy matching.
+  - name: force_tls_12
+    type: boolean
+    default: false
+    label: Force TLS 1.2
+    description: Whether or not to force TLS 1.2 for agent HTTPS communications.
 
 - name: additional-datadog-endpoints
   label: Additional Endpoints
@@ -876,6 +881,7 @@ packages:
     instances: 1
     properties:
       cluster_agent:
+        force_tls_12: (( .properties.force_tls_12.value ))
         bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
         locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
         bbs_poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_poll_interval.value ))
@@ -964,6 +970,7 @@ runtime_configs:
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
           no_proxy_nonexact_match: (( .properties.no_proxy_nonexact_match.value ))
+          force_tls_12: (( .properties.force_tls_12.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
@@ -1043,6 +1050,7 @@ runtime_configs:
             https: (( .properties.https_proxy_url.value ))
             no_proxy: (( .properties.no_proxy.value ))
           no_proxy_nonexact_match: (( .properties.no_proxy_nonexact_match.value ))
+          force_tls_12: (( .properties.force_tls_12.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
