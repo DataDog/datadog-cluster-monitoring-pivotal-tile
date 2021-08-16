@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.7.0 / 2021-08-16
+
+* [Added] Add option to collect monit children processes. See [#53](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/53).
+* [Added] Add option to force use of TLS 1.2. See [#52](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/52).
+* [Added] Add configuration option for CC API list app endpoint batch size. See [#51](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/51).
+* [Added] Add property to specify ulimit for number of open file descriptors. See [#50](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/50).
+* [Added] Add configuration forms for Datadog Agent Bosh addon placement rules. See [#49](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/49).
+* [Added] Bump Datadog Agent Bosh Release to version 4.6.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.6.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 1.7.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.7.0) for details.
+* [Added] Bump Datadog Firehose Nozzle Release to version 83. See [here](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/83) for details.
+
+This tile includes the following packages:
+  * [Firehose Nozzle 83](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/83)
+  * [Datadog Agent Bosh Release 4.6.0](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.6.0)
+  * [Datadog Cluster Agent Bosh Release 1.7.0](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.7.0)
+
 ## 4.6.0 / 2021-04-20
 
 * [Added] Add `no_proxy_nonexact_match` configuration option. See [#47](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/47).
