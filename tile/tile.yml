@@ -299,6 +299,11 @@ forms:
     type: boolean
     label: Monitor Monit Processes
     description: Add monit processes to process check
+  - name: collect_monit_children_processes
+    default: false
+    type: boolean
+    label: Collect Monit Children Processes
+    description: Enable the collection of monit children processes in the process check
   - name: generate_system_processes
     default: true
     type: boolean
@@ -983,6 +988,7 @@ runtime_configs:
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
           generate_monit_processes: (( .properties.generate_monit_processes.value ))
+          collect_monit_children_processes: (( .properties.collect_monit_children_processes.value ))
           generate_system_processes: (( .properties.generate_system_processes.value ))
           generate_ntp_config: (( .properties.generate_ntp_config.value ))
           generate_ntp_config_host: (( .properties.generate_ntp_config_host.value ))
@@ -1063,6 +1069,7 @@ runtime_configs:
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
           generate_monit_processes: (( .properties.generate_monit_processes.value ))
+          collect_monit_children_processes: (( .properties.collect_monit_children_processes.value ))
           generate_system_processes: (( .properties.generate_system_processes.value ))
           generate_ntp_config: (( .properties.generate_ntp_config.value ))
           generate_ntp_config_host: (( .properties.generate_ntp_config_host.value ))
