@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.7.0 / 2021-08-16
+## 4.7.0 / 2021-08-18
 
 * [Added] Add option to collect monit children processes. See [#53](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/53).
 * [Added] Add option to force use of TLS 1.2. See [#52](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/52).
