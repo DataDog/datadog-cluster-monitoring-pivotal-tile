@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.9.1 / 2021-12-03
+
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 1.9.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.9.0) for details.
+
+This tile includes the following packages:
+  * [Firehose Nozzle 83](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/83)
+  * [Datadog Agent Bosh Release 4.8.0](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.8.0)
+  * [Datadog Cluster Agent Bosh Release 1.9.0](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/1.9.0)
+
 ## 4.9.0 / 2021-11-29
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.8.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.8.0) for details.
