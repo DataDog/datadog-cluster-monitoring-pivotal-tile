@@ -313,7 +313,6 @@ forms:
         label: Disable Network Performance Monitoring
         default: false
         description: Disable network performance monitoring (NPM).
-
   - name: agent_listen_port
     type: string
     label: Agent Listen Port
