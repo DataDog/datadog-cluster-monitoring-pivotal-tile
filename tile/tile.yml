@@ -280,10 +280,40 @@ forms:
     default: false
     description: Enable only the container collection of the process agent. Processes are not collected.
   - name: system_probe_enabled
+    type: selector
     label: Enable System Probe
-    type: boolean
-    default: false
+    default: "No"
     description: Enable the system probe.
+    option_templates:
+    - name: disabled_option
+      select_value: "No"
+      property_blueprints:
+      - name: enabled_value
+        type: boolean
+        configurable: false
+        default: false
+      named_manifests:
+      - name: system_probe_enabled
+        manifest: |
+          false
+    - name: enabled_option
+      select_value: "Yes"
+      named_manifests:
+      - name: system_probe_enabled
+        manifest: |
+          true
+      property_blueprints:
+      - name: enabled_value
+        type: boolean
+        configurable: false
+        default: true
+      - name: disable_network_performance_monitoring
+        configurable: true
+        type: boolean
+        label: Disable Network Performance Monitoring
+        default: false
+        description: Disable network performance monitoring (NPM).
+
   - name: agent_listen_port
     type: string
     label: Agent Listen Port
@@ -984,7 +1014,8 @@ runtime_configs:
           use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
           process_agent_containers_only: (( .properties.process_agent_containers_only.value ))
-          system_probe_enabled: (( .properties.system_probe_enabled.value ))
+          system_probe_enabled: (( .properties.system_probe_enabled.selected_option.parsed_manifest(system_probe_enabled) ))
+          disable_network_performance_monitoring: (( .properties.system_probe_enabled.enabled_option.disable_network_performance_monitoring.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
           generate_monit_processes: (( .properties.generate_monit_processes.value ))
