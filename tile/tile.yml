@@ -161,6 +161,11 @@ forms:
   label: Datadog Firehose Nozzle Config
   description: Configure your Datadog Firehose Nozzle
   properties:
+  - name: use_cluster_agent_api
+    type: boolean
+    label: Use Cluster Agent API
+    default: false
+    description: Whether or not to use the Cluster Agent API instead of the Cloud Controller API. if enabled, remember to set "Serve Nozzle data" in the Cluster Agent config.
   - name: metric_prefix
     type: string
     label: Metric Prefix
@@ -533,6 +538,12 @@ forms:
         label: Cluster Agent port
         default: 5005
         description: Port on which the Cluster Agent can be reached by Node Agents.
+      - name: cluster_agent_serve_nozzle_data
+        configurable: true
+        type: boolean
+        label: Serve Nozzle Data
+        default: false
+        description: Whether or not to serve preprocessed data ready to be used by the nozzles.
       - name: enable_cloud_foundry_api_apps_polling
         configurable: true
         type: boolean
@@ -862,6 +873,10 @@ packages:
         enable_metadata_collection: (( .properties.enable_metadata_collection.value ))
         metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings ))
         metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings ))
+        dca_enabled: (( .properties.use_cluster_agent.value ))
+        dca_url: https://datadog-cluster-agent.(( ..datadog.deployment_name ))
+        dca_port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
+        dca_token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
       uaa:
         client: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
@@ -901,6 +916,7 @@ packages:
         enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
         enable_cloud_foundry_api_check: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_check.value ))
         enable_cloud_foundry_api_apps_polling: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_apps_polling.value ))
+        serve_nozzle_data: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_serve_nozzle_data.value ))
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
         poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_poll_interval.value ))
@@ -927,7 +943,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "4.9.0"     # Update this if update the agent
+      version: "7.33.1_1644590789.2245178"     # Update this if update the agent
     addons:
     - name: datadog
       include:
@@ -1019,7 +1035,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "4.9.0"     # Update this if update the agent
+      version: "7.33.1_1644590789.2245178"     # Update this if update the agent
     addons:
     - name: datadog
       include:
