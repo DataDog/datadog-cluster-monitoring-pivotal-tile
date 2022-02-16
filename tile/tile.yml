@@ -1072,7 +1072,7 @@ runtime_configs:
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
           process_agent_containers_only: (( .properties.process_agent_containers_only.value ))
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
-          disable_network_performance_monitoring: (( .properties.system_probe_enabled.enabled_option.disable_network_performance_monitoring.value ))
+          disable_network_performance_monitoring: (( .properties.disable_network_performance_monitoring.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
           generate_monit_processes: (( .properties.generate_monit_processes.value ))
