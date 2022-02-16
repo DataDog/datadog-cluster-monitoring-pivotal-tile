@@ -280,8 +280,8 @@ forms:
     default: false
     description: Enable only the container collection of the process agent. Processes are not collected.
   - name: system_probe_enabled
-    type: boolean
     label: Enable System Probe
+    type: boolean
     default: false
     description: Enable the system probe.
   - name: disable_network_performance_monitoring
