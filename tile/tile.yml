@@ -163,9 +163,9 @@ forms:
   properties:
   - name: use_cluster_agent_api
     type: boolean
-    label: Use Cluster Agent API
+    label: Use Datadog Cluster Agent API
     default: false
-    description: Whether or not to use the Cluster Agent API instead of the Cloud Controller API. if enabled, remember to set "Serve Nozzle data" in the Cluster Agent config.
+    description: Whether or not to use the Datadog Cluster Agent API instead of the Cloud Controller API (CAPI). if enabled, remember to set "Serve Nozzle data" in the Cluster Agent config.
   - name: metric_prefix
     type: string
     label: Metric Prefix
@@ -541,9 +541,9 @@ forms:
       - name: cluster_agent_serve_nozzle_data
         configurable: true
         type: boolean
-        label: Serve Nozzle Data
+        label: Serve Nozzle data
         default: false
-        description: Whether or not to serve preprocessed data ready to be used by the nozzles.
+        description: Whether or not to serve preprocessed data for the nozzles.
       - name: enable_cloud_foundry_api_apps_polling
         configurable: true
         type: boolean
@@ -873,7 +873,7 @@ packages:
         enable_metadata_collection: (( .properties.enable_metadata_collection.value ))
         metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings ))
         metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings ))
-        dca_enabled: (( .properties.use_cluster_agent.value ))
+        dca_enabled: (( .properties.use_cluster_agent_api.value ))
         dca_url: https://datadog-cluster-agent.(( ..datadog.deployment_name ))
         dca_port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
         dca_token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
