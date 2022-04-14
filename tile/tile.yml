@@ -289,6 +289,11 @@ forms:
     type: boolean
     default: false
     description: Enable the system probe.
+  - name: disable_network_performance_monitoring
+    type: boolean
+    label: Disable Network Performance Monitoring
+    default: false
+    description: Disable network performance monitoring (NPM).
   - name: agent_listen_port
     type: string
     label: Agent Listen Port
@@ -943,7 +948,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "7.33.1_1644590789.2245178"     # Update this if update the agent
+      version: "4.9.1"     # Update this if update the agent
     addons:
     - name: datadog
       include:
@@ -1001,6 +1006,7 @@ runtime_configs:
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
           process_agent_containers_only: (( .properties.process_agent_containers_only.value ))
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
+          disable_network_performance_monitoring: (( .properties.disable_network_performance_monitoring.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
           generate_monit_processes: (( .properties.generate_monit_processes.value ))
@@ -1035,7 +1041,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "7.33.1_1644590789.2245178"     # Update this if update the agent
+      version: "4.9.1"     # Update this if update the agent
     addons:
     - name: datadog
       include:
@@ -1082,6 +1088,7 @@ runtime_configs:
           process_agent_enabled: (( .properties.process_agent_enabled.value ))
           process_agent_containers_only: (( .properties.process_agent_containers_only.value ))
           system_probe_enabled: (( .properties.system_probe_enabled.value ))
+          disable_network_performance_monitoring: (( .properties.disable_network_performance_monitoring.value ))
           agent_listen_port: (( .properties.agent_listen_port.value ))
           generate_processes: (( .properties.generate_processes.value ))
           generate_monit_processes: (( .properties.generate_monit_processes.value ))

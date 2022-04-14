@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.0.1 / 2022-02-25
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.9.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.9.1) for details.
+* [Added] Add option to disable Network Performance Monitoring when enabling system probe. See [#64](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/64).
+
 ## 5.0.0 / 2022-02-07
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.9.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.9.0) for details.
