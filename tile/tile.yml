@@ -165,7 +165,7 @@ forms:
     type: boolean
     label: Use Datadog Cluster Agent API
     default: false
-    description: Whether or not to use the Datadog Cluster Agent API instead of the Cloud Controller API (CAPI). if enabled, remember to set "Serve Nozzle data" in the Cluster Agent config.
+    description: Whether or not to use the Datadog Cluster Agent API instead of the Cloud Controller API (CAPI). If enabled, requires "Serve Nozzle data" to be enabled in the Datadog Cluster Agent settings.
   - name: metric_prefix
     type: string
     label: Metric Prefix
