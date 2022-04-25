@@ -554,12 +554,6 @@ forms:
         label: Serve Nozzle data
         default: false
         description: Whether or not to serve preprocessed data for the nozzles.
-      - name: cluster_agent_advanced_tagging
-        configurable: true
-        type: boolean
-        label: Enable Advanced Tagging
-        default: false
-        description: Whether or not to collect extra tags such as `sidecar_present` and `sidecar_count` for containers.
       - name: enable_cloud_foundry_api_apps_polling
         configurable: true
         type: boolean
@@ -934,7 +928,6 @@ packages:
         enable_cloud_foundry_api_check: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_check.value ))
         enable_cloud_foundry_api_apps_polling: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_apps_polling.value ))
         serve_nozzle_data: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_serve_nozzle_data.value ))
-        advanced_tagging: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_advanced_tagging.value ))
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
         poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_poll_interval.value ))
