@@ -181,6 +181,11 @@ forms:
     label: Enable Metadata Collection
     default: false
     description: Collect application, space and organization labels and annotations to tag App Metrics.
+  - name: enable_advanced_tagging
+    type: boolean
+    label: Enable Advanced Tagging
+    default: false
+    description: Send additional tags such as `sidecar_present` and `sidecar_count` for App Metrics.
   - name: metadata_keys_whitelist_patterns
     type: string_list
     label: Metadata Whitelist
@@ -882,6 +887,7 @@ packages:
         dca_url: https://datadog-cluster-agent.(( ..datadog.deployment_name ))
         dca_port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
         dca_token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
+        enable_advanced_tagging: (( .properties.enable_advanced_tagging.value ))
       uaa:
         client: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
