@@ -2,7 +2,7 @@
 
 ## 5.1.0 / 2022-04-26
 
-* [Added] Bump Datadog Firehose Nozzle Release to version 85. See [here](https://https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/85) for details.
+* [Added] Bump Datadog Firehose Nozzle Release to version 85. See [here](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/85) for details.
 * [Added] Bump Datadog Agent Bosh Release to version 4.9.2. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.9.2) for details.
 * [Added] Bump Datadog Cluster Agent Bosh Release to version 2.1.1. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.1.1) for details.
 * [Added] Add option to enable advanced tagging in the nozzle. See [#67](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/67).
