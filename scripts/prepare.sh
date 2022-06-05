@@ -16,3 +16,10 @@ curl -L "https://cloudfoundry.datadoghq.com/datadog-cluster-agent/datadog-cluste
 
 # download nozzle bosh release tarball
 curl -L "https://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-$NOZZLE_RELEASE_VERSION.tgz" -o $RESOURCES_DIR/datadog-firehose-nozzle-release.tgz
+
+# install tile-generator
+if ! [ command -v tile 2>&1 >/dev/null ] ; then
+    curl -L "https://github.com/cf-platform-eng/tile-generator/releases/download/v14.0.5/tile_linux-64bit" -o tile_linux-64bit
+    chmod +x tile_linux-64bit
+    mv tile_linux-64bit /usr/local/bin/tile
+fi
