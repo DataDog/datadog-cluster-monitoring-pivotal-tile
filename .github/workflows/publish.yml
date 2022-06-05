@@ -1,14 +1,14 @@
 name: Publish
 
 on:
-  push:
-    branches:
-      - 'noueman/add-scripts-folder'
+  release:
+    types:
+      - published
 
 jobs:
   upload_release:
     name: Upload tile
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
         with:
