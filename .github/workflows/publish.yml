@@ -1,0 +1,23 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  upload_release:
+    name: Upload tile
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+
+      - name: Upload Tile to Pivotal Network (product files)
+        run: ./scripts/publish.sh
+        shell: bash
+        env:
+          PIVNET_TOKEN: ${{ secrets.PIVNET_TOKEN }}
+          VERSION: ${{ github.event.release.tag_name }}

@@ -28,7 +28,7 @@ else
     exit 1
 fi
 
-VERSION="$major.$minor.$patch"
+VERSION=${VERSION:-"$major.$minor.$patch"}
 
 # build product file
 tile build $VERSION
