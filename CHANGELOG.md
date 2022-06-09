@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.2.0 / 2022-06-09
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.10.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.10.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.2.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.2.0) for details.
+
 ## 5.1.0 / 2022-04-26
 
 * [Added] Bump Datadog Firehose Nozzle Release to version 85. See [here](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/85) for details.
