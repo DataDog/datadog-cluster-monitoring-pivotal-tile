@@ -212,6 +212,11 @@ forms:
     label: Enable Metadata Collection
     default: false
     description: Collect application, space and organization labels and annotations to tag App Metrics.
+  - name: enable_application_logs
+    type: boolean
+    label: Enable Application Logs
+    default: false
+    description: Collect application logs from the Loggregator.
   - name: enable_advanced_tagging
     type: boolean
     label: Enable Advanced Tagging
@@ -969,6 +974,7 @@ packages:
         https_proxy_url: (( .properties.https_proxy_url.value ))
         no_proxy: (( .properties.no_proxy.value ))
         enable_metadata_collection: (( .properties.enable_metadata_collection.value ))
+        enable_application_logs: (( .properties.enable_application_logs.value ))
         metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings ))
         metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings ))
         dca_enabled: (( .properties.use_cluster_agent_api.value ))
