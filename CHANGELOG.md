@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.2.1 / 2022-07-11
+
+* [Fixed] Add missing option to enable advanced tagging in the cluster agent. See [#74](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/74).
+
 ## 5.2.0 / 2022-06-09
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.10.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.10.0) for details.
