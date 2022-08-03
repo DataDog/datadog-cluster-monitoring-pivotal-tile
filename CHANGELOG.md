@@ -2,6 +2,8 @@
 
 ## 5.3.0 / 2022-08-03
 
+* [Added] Bump Datadog Agent Bosh Release to version 4.11.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.11.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.3.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.3.0) for details.
 
 ## 5.2.1 / 2022-07-11
 
