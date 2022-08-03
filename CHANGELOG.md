@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.3.0 / 2022-08-03
+
+
 ## 5.2.1 / 2022-07-11
 
 * [Fixed] Add missing option to enable advanced tagging in the cluster agent. See [#74](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/74).
