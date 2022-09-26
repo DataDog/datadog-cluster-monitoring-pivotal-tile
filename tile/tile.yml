@@ -918,6 +918,7 @@ packages:
     instances: 1
     properties:
       cluster_agent:
+        api_key: (( .properties.api_key.value ))
         force_tls_12: (( .properties.force_tls_12.value ))
         bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
         locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
