@@ -559,7 +559,25 @@ forms:
         type: boolean
         label: Enable Advanced Tagging
         default: false
+        description: Whether or not to collect all extra tags (sidecars, isolation segments) for containers.
+      - name: cluster_agent_sidecars_tags
+        configurable: true
+        type: boolean
+        label: Enable Sidecars tags
+        default: false
         description: Whether or not to collect extra tags such as `sidecar_present` and `sidecar_count` for containers.
+      - name: cluster_agent_isolation_segments_tags
+        configurable: true
+        type: boolean
+        label: Enable Isolation Segments tags
+        default: false
+        description: Whether or not to collect extra tags such as `segment_id` and `segment_name` for containers.
+      - name: cluster_agent_refresh_on_cache_miss
+        configurable: true
+        type: boolean
+        label: Enable refresh on cache miss
+        default: false
+        description: Whether or not to query the CAPI on cache miss in the cluster agent.
       - name: enable_cloud_foundry_api_apps_polling
         configurable: true
         type: boolean
@@ -936,6 +954,9 @@ packages:
         enable_cloud_foundry_api_apps_polling: (( .properties.cluster_agent_enabled.enabled_option.enable_cloud_foundry_api_apps_polling.value ))
         serve_nozzle_data: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_serve_nozzle_data.value ))
         advanced_tagging: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_advanced_tagging.value ))
+        sidecars_tags: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_sidecars_tags.value ))
+        isolation_segments_tags: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_isolation_segments_tags.value ))
+        refresh_on_cache_miss: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_refresh_on_cache_miss.value ))
       cloud_foundry_api:
         api_url: https://api.(( ..cf.cloud_controller.system_domain.value ))
         poll_interval: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_api_poll_interval.value ))
