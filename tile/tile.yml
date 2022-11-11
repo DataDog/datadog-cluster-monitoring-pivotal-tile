@@ -580,7 +580,7 @@ forms:
       - name: cluster_agent_refresh_on_cache_miss
         configurable: true
         type: boolean
-        label: Enable refresh on cache miss
+        label: Enable Refresh on CAPI Cache miss
         default: false
         description: Whether or not to query the CAPI on cache miss in the cluster agent.
       - name: enable_cloud_foundry_api_apps_polling
