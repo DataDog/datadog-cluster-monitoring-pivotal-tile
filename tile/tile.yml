@@ -181,6 +181,10 @@ forms:
     label: App Metrics
     default: true
     description: Grab app container metrics (e.g. cpu and memory usage).
+  - name: enable_metadata_app_metrics_prefix
+    type: boolean
+    label: Enable Metadata App Metrics Prefix
+    description: Wheter or not to add "label/" or "annotation/" prefix to application metadata tags in App Metrics.
   - name: enable_metadata_collection
     type: boolean
     label: Enable Metadata Collection
@@ -918,6 +922,7 @@ packages:
         dca_port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
         dca_token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
         enable_advanced_tagging: (( .properties.enable_advanced_tagging.value ))
+        enable_metadata_app_metrics_prefix : (( .properties.enable_metadata_app_metrics_prefix.value ))
       uaa:
         client: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
