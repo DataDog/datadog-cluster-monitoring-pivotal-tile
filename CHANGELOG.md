@@ -2,6 +2,7 @@
 
 ## 5.4.0 / 2022-11-15
 
+* [Added] Bump Datadog Agent Bosh Release to version 4.12.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.12.0) for details.
 * [Added] Add nozzle option to enable/disable app metadata prefix in app metrics. See [#84](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/84).
 * [Added] Add support for ubuntu-jammy stemcell. See [#82](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/82).
 * [Added] Add `refresh_on_cache_miss`, `sidecars_tags`, and `isolation_segments_tags` properties to the cluster agent. See [#79](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/79).
