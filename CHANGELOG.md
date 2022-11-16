@@ -3,7 +3,7 @@
 ## 5.4.1 / 2022-11-16
 
 *Note: This is a beta release.*
-* [Added] Bump Datadog Agent Bosh Release to version 4.12.1-beta. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.12.1-beta) for details.
+* [Added] Bump Datadog Agent Bosh Release to version 4.12.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.12.1) for details.
 
 ## 5.4.0 / 2022-11-15
 
