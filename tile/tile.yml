@@ -6,16 +6,6 @@ description: Send metrics from VMware Tanzu infrastructure to Datadog!
 apply_open_security_group: false       # Apply open security group, default: false
 allow_paid_service_plans: false        # Allow paid service plans, default: false
 
-stemcell_criteria:
-  os: ubuntu-jammy
-  requires_cpi: false
-  version: '1.8'
-
-additional_stemcell_criteria:
-  os: ubuntu-xenial
-  requires_cpi: false
-  version: '621'
-
 properties:
 - name: author
   type: string
