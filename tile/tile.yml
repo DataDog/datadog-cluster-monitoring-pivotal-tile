@@ -428,6 +428,21 @@ forms:
     type: integer
     default: 10
     description: How often to poll the Datadog Cluster Agent for new integration configurations (in seconds).
+  - name: container_tagger_retry_interval
+    label: Datadog Agent Container Tagger retry interval
+    type: integer
+    default: 20
+    description: How often the Datadog Agent tries to inject metadata tags in a Container.
+  - name: container_tagger_retry_count
+    label: Datadog Agent Container Tagger retry count
+    type: integer
+    default: 20
+    description: How many attempts the Datadog Agent tries to inject metadata tags in a Container.
+  - name: container_tagger_shell_path
+    label: Datadog Agent Container Tagger shell path
+    type: string
+    default: "/bin/sh"
+    description: Path to the shell to use to run the update container tags script.
 
 - name: disk-check-config
   label: Disk integration configuration
@@ -1082,6 +1097,10 @@ runtime_configs:
           port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
           enabled: (( .properties.cluster_agent_enabled.selected_option.parsed_manifest(cluster_agent_enabled) ))
           address: datadog-cluster-agent.(( ..datadog.deployment_name ))
+        container_tagger:
+          retry_interval: (( .properties.container_tagger_retry_interval.value ))
+          retry_count: (( .properties.container_tagger_retry_count.value ))
+          shell_path: (( .properties.container_tagger_shell_path.value ))
 
 - name: datadog-agent-kube-control-plan
   runtime_config:
