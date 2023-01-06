@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.5.0 / 2023-01-06
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.13.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.13.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.5.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.5.0) for details.
+* [Added] Add options for the `container_tagger` properties. See [#88](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/88).
+* [Changed] Use `ubuntu-xenial` stemcells. See [#89](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/89).
+
 ## 5.4.1 / 2022-11-16
 
 *Note: This is a beta release.*
