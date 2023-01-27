@@ -563,9 +563,9 @@ forms:
         type: secret
         label: Authentication token
         constraints:
-        - must_match_regex: '^.{32,}$'
-          error_message: 'This token must be at least 32 characters long'
-        description: Token for Node Agent <-> Cluster Agent authentication. String of 32 characters or more.
+        - must_match_regex: '^$|^.{32,}$'
+          error_message: 'This token must be at least 32 characters long or empty to be auto-generated'
+        description: Token for Node Agent <-> Cluster Agent authentication. String of 32 characters or more. Leave this field empty for an auto-generated token.
       - name: cluster_agent_port
         configurable: true
         type: port
