@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.5.1 / 2023-02-07
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.13.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.13.1) for details.
+
 ## 5.5.0 / 2023-01-26
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.13.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.13.0) for details.
