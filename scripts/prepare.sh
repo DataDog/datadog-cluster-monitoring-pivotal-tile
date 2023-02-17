@@ -4,9 +4,9 @@ set -e
 
 RESOURCES_DIR="tile/resources"
 
-AGENT_VERSION=${AGENT_VERSION:-4.13.1}
-CLUSTER_AGENT_VERSION=${CLUSTER_AGENT_VERSION:-2.5.1}
-NOZZLE_RELEASE_VERSION=${NOZZLE_RELEASE_VERSION:-86}
+AGENT_VERSION=4.13.1
+CLUSTER_AGENT_VERSION=2.5.1
+NOZZLE_RELEASE_VERSION=86
 
 # download agent bosh release tarball
 curl -L "https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-$AGENT_VERSION.tgz" -o $RESOURCES_DIR/datadog-agent-boshrelease.tgz
