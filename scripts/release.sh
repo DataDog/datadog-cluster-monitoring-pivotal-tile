@@ -2,6 +2,8 @@
 
 set -e
 
+DRY_RUN=${DRY_RUN:-true}
+
 function setup() {
     echo "--- setting pivnet-cli and access token"
 
@@ -67,11 +69,7 @@ function publish_cluster_tile() {
 }
 
 function main() {
-    ./scripts/prepare.sh
-    ./scripts/release.sh
-
-    LATEST_VERSION=$(tail -n1 tile/tile-history.yml | awk '{print $2}')
-    VERSION=${VERSION:-$LATEST_VERSION}
+    VERSION=$VERSION
 
     setup
     publish_cluster_tile
