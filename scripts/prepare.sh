@@ -4,8 +4,8 @@ set -e
 
 RESOURCES_DIR="tile/resources"
 
-AGENT_VERSION=4.13.1
-CLUSTER_AGENT_VERSION=2.5.1
+AGENT_VERSION=4.14.0
+CLUSTER_AGENT_VERSION=2.6.0
 NOZZLE_RELEASE_VERSION=86
 
 # download agent bosh release tarball
