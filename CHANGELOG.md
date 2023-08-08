@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.7.0 / 2023-08-08
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.14.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.14.1) for details.
+* [Added] Upgrade tile to `ubuntu-jammy` stemcells. See [#101](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/101).
+
 ## 5.6.0 / 2023-07-13
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.14.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.14.0) for details.
