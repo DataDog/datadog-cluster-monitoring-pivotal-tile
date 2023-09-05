@@ -438,6 +438,17 @@ forms:
     type: string
     default: "/bin/sh"
     description: Path to the shell to use to run the update container tags script.
+  - name: enable_remote_configuration
+    type: boolean
+    optional: true
+    label: Enable Remote Configuration
+    description: Whether or not to enable remote configuration for the agent.
+  - name: enable_inventories_configuration
+    type: boolean
+    optional: true
+    label: Enable Inventories Configuration
+    description: |
+      Whether or not to send the Agent configuration to Datadog to be displayed in the Agent Configuration section of the host detail panel.
 
 - name: disk-check-config
   label: Disk integration configuration
@@ -1053,6 +1064,8 @@ runtime_configs:
             no_proxy: (( .properties.no_proxy.value ))
           no_proxy_nonexact_match: (( .properties.no_proxy_nonexact_match.value ))
           force_tls_12: (( .properties.force_tls_12.value ))
+          enable_remote_configuration: (( .properties.enable_remote_configuration.value ))
+          enable_inventories_configuration: (( .properties.enable_inventories_configuration.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
@@ -1139,6 +1152,8 @@ runtime_configs:
             no_proxy: (( .properties.no_proxy.value ))
           no_proxy_nonexact_match: (( .properties.no_proxy_nonexact_match.value ))
           force_tls_12: (( .properties.force_tls_12.value ))
+          enable_remote_configuration: (( .properties.enable_remote_configuration.value ))
+          enable_inventories_configuration: (( .properties.enable_inventories_configuration.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
