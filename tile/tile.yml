@@ -440,12 +440,12 @@ forms:
     description: Path to the shell to use to run the update container tags script.
   - name: enable_remote_configuration
     type: boolean
-    optional: true
+    default: false
     label: Enable Remote Configuration
     description: Whether or not to enable remote configuration for the agent.
   - name: enable_inventories_configuration
     type: boolean
-    optional: true
+    default: false
     label: Enable Inventories Configuration
     description: |
       Whether or not to send the Agent configuration to Datadog to be displayed in the Agent Configuration section of the host detail panel.
