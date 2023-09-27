@@ -453,12 +453,12 @@ forms:
   - name: bpm_enabled
     type: selector
     label: Select the desired BOSH processes manager
-    default: "Monit"
+    default: "monit"
     description: |
       Whether to use monit or BPM to manage the Datadog Agent processes.
     option_templates:
     - name: disabled_option
-      select_value: "Monit"
+      select_value: "monit"
       property_blueprints:
       - name: enabled_value
         type: boolean
