@@ -1192,7 +1192,13 @@ runtime_configs:
           system_probe.memory: (( .properties.bpm_system_probe_memory.value ))
           system_probe.open_files: (( .properties.bpm_system_probe_open_files.value ))
           system_probe.processes: (( .properties.bpm_system_probe_processes.value ))
-
+    - name: bpm
+      include:
+        deployments: 
+          - (( ..datadog.deployment_name ))
+      jobs:
+      - name: bpm
+        release: bpm  
 - name: datadog-agent-kube-control-plan
   runtime_config:
     releases:
