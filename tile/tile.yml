@@ -1112,6 +1112,10 @@ packages:
   type: bosh-release
   path: resources/datadog-agent-boshrelease.tgz
 
+- name: bpm-release
+  type: bosh-release
+  path: resources/bpm-release.tgz
+
 
 runtime_configs:
 - name: datadog-agent
@@ -1119,6 +1123,8 @@ runtime_configs:
     releases:
     - name: datadog-agent
       version: "4.15.1"     # Update this if update the agent
+    - name: bpm
+      version: "1.2.7"
     addons:
     - name: datadog
       include:
@@ -1232,7 +1238,7 @@ runtime_configs:
           - (( ..datadog.deployment_name ))
       jobs:
       - name: bpm
-        release: bpm  
+        release: bpm
 - name: datadog-agent-kube-control-plan
   runtime_config:
     releases:
