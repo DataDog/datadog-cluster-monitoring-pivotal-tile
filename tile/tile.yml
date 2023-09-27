@@ -1054,7 +1054,10 @@ packages:
       cc:
         endpoint: https://api.(( ..cf.cloud_controller.system_domain.value ))
         api_batch_size: (( .properties.api_batch_size.value ))
-
+  - name: bpm
+    consumes: {}
+    provides: {}
+    release: bpm
 - name: datadog-cluster-agent-boshrelease
   type: bosh-release
   path: resources/datadog-cluster-agent-boshrelease.tgz
@@ -1107,14 +1110,13 @@ packages:
       cloud_foundry_bbs:
         env_include: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_include.parsed_strings))
         env_exclude: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_exclude.parsed_strings))
-
+  - name: bpm
+    consumes: {}
+    provides: {}
+    release: bpm
 - name: datadog-agent-boshrelease
   type: bosh-release
   path: resources/datadog-agent-boshrelease.tgz
-
-- name: datadog-bpm-release
-  type: bosh-release
-  path: resources/bpm-release.tgz
 
 
 runtime_configs:
@@ -1123,8 +1125,6 @@ runtime_configs:
     releases:
     - name: datadog-agent
       version: "4.15.1"     # Update this if update the agent
-    - name: bpm
-      version: "1.2.7"
     addons:
     - name: datadog
       include:
@@ -1232,13 +1232,6 @@ runtime_configs:
           system_probe.memory: (( properties.bpm_enabled.enabled_option.bpm_system_probe_memory.value ))
           system_probe.open_files: (( properties.bpm_enabled.enabled_option.bpm_system_probe_open_files.value ))
           system_probe.processes: (( properties.bpm_enabled.enabled_option.bpm_system_probe_processes.value ))
-    - name: datadog-bpm
-      include:
-        deployments: 
-          - (( ..datadog.deployment_name ))
-      jobs:
-      - name: bpm
-        release: bpm
 - name: datadog-agent-kube-control-plan
   runtime_config:
     releases:
