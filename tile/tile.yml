@@ -501,7 +501,7 @@ forms:
         configurable: true
         type: string
         label: Memory limit for the process-agent process under BPM.
-        default: 256M
+        default: 128M
         description: The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
       - name: bpm_process_agent_open_files
         configurable: true
@@ -519,7 +519,7 @@ forms:
         configurable: true
         type: string
         label: Memory limit for the trace-agent process under BPM.
-        default: 256M
+        default: 128M
         description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
       - name: bpm_trace_agent_open_files
         configurable: true
