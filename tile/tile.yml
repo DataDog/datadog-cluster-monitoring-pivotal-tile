@@ -1009,10 +1009,6 @@ packages:
     templates:
     - name: datadog-firehose-nozzle
       release: datadog-firehose-nozzle
-    - name: bpm
-      consumes: {}
-      provides: {}
-      release: bpm
     dynamic_ip: 1
     instances: 1
     properties:
@@ -1074,10 +1070,6 @@ packages:
         datadog-cluster-agent:
           aliases:
           - domain: datadog-cluster-agent.(( ..datadog.deployment_name ))
-    - name: bpm
-      consumes: {}
-      provides: {}
-      release: bpm
     dynamic_ip: 1
     instances: 1
     properties:
@@ -1128,6 +1120,8 @@ runtime_configs:
     releases:
     - name: datadog-agent
       version: "4.15.1"     # Update this if update the agent
+    - name: bpm
+      version: "1.2.7"      # Update this if update bpm
     addons:
     - name: datadog
       include:
@@ -1235,6 +1229,15 @@ runtime_configs:
           system_probe.memory: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_memory.value ))
           system_probe.open_files: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_open_files.value ))
           system_probe.processes: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_processes.value ))
+    - name: datadog-bpm
+      include:
+        deployments:
+          - (( ..datadog.deployment_name ))
+          - (( ..datadog-application-monitoring.deployment_name || "" ))
+      jobs:
+      - name: bpm
+        release: bpm
+      
 - name: datadog-agent-kube-control-plan
   runtime_config:
     releases:
