@@ -998,6 +998,9 @@ forms:
       configurable: true
 
 packages:
+- name: bpm
+  type: bosh-release
+  path: resources/bpm-release.tgz
 - name: datadog-firehose-nozzle-release
   type: bosh-release
   path: resources/datadog-firehose-nozzle-release.tgz
@@ -1006,6 +1009,10 @@ packages:
     templates:
     - name: datadog-firehose-nozzle
       release: datadog-firehose-nozzle
+    - name: bpm
+      consumes: {}
+      provides: {}
+      release: bpm
     dynamic_ip: 1
     instances: 1
     properties:
@@ -1054,10 +1061,7 @@ packages:
       cc:
         endpoint: https://api.(( ..cf.cloud_controller.system_domain.value ))
         api_batch_size: (( .properties.api_batch_size.value ))
-  - name: bpm
-    consumes: {}
-    provides: {}
-    release: bpm
+
 - name: datadog-cluster-agent-boshrelease
   type: bosh-release
   path: resources/datadog-cluster-agent-boshrelease.tgz
@@ -1070,6 +1074,10 @@ packages:
         datadog-cluster-agent:
           aliases:
           - domain: datadog-cluster-agent.(( ..datadog.deployment_name ))
+    - name: bpm
+      consumes: {}
+      provides: {}
+      release: bpm
     dynamic_ip: 1
     instances: 1
     properties:
@@ -1110,14 +1118,9 @@ packages:
       cloud_foundry_bbs:
         env_include: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_include.parsed_strings))
         env_exclude: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_exclude.parsed_strings))
-  - name: bpm
-    consumes: {}
-    provides: {}
-    release: bpm
 - name: datadog-agent-boshrelease
   type: bosh-release
   path: resources/datadog-agent-boshrelease.tgz
-
 
 runtime_configs:
 - name: datadog-agent
