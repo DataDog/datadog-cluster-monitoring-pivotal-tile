@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.8.0 / 2023-09-21
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.15.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.15.1) for details.
+* [Added] Add `enable_remote_configuration` and `enable_inventories_configuration` properties. See [#103](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/103).
+
 ## 5.7.0 / 2023-08-08
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.14.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.14.1) for details.
