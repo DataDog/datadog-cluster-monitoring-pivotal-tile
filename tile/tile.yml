@@ -497,24 +497,6 @@ forms:
         label: Processes limit for the agent process under BPM.
         default: 256
         description: The number of processes which the agent process is allowed to have running at any one moment (inclusive of the main process).
-      - name: bpm_trace_agent_memory
-        configurable: true
-        type: string
-        label: Memory limit for the trace-agent process under BPM.
-        default: 256M
-        description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
-      - name: bpm_trace_agent_open_files
-        configurable: true
-        type: integer
-        label: Open files limit for the trace-agent process under BPM.
-        default: 1024
-        description: The number of files the trace-agent process is allowed to have open at any one time.
-      - name: bpm_trace_agent_processes
-        configurable: true
-        type: integer
-        label: Processes limit for the trace-agent process under BPM.
-        default: 256
-        description: The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process).
       - name: bpm_process_agent_memory
         configurable: true
         type: string
@@ -533,6 +515,24 @@ forms:
         label: Processes limit for the process-agent process under BPM.
         default: 256
         description: The number of processes which the process-agent process is allowed to have running at any one moment (inclusive of the main process).
+      - name: bpm_trace_agent_memory
+        configurable: true
+        type: string
+        label: Memory limit for the trace-agent process under BPM.
+        default: 256M
+        description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+      - name: bpm_trace_agent_open_files
+        configurable: true
+        type: integer
+        label: Open files limit for the trace-agent process under BPM.
+        default: 1024
+        description: The number of files the trace-agent process is allowed to have open at any one time.
+      - name: bpm_trace_agent_processes
+        configurable: true
+        type: integer
+        label: Processes limit for the trace-agent process under BPM.
+        default: 256
+        description: The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process).
       - name: bpm_system_probe_memory
         configurable: true
         type: string
