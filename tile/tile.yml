@@ -484,6 +484,7 @@ forms:
         type: string
         label: Memory limit for the agent process under BPM.
         default: ""
+        optional: true
         description: The memory limit to apply to the agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
       - name: bpm_agent_open_files
         configurable: true
@@ -502,6 +503,7 @@ forms:
         type: string
         label: Memory limit for the process-agent process under BPM.
         default: ""
+        optional: true
         description: The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
       - name: bpm_process_agent_open_files
         configurable: true
@@ -520,6 +522,7 @@ forms:
         type: string
         label: Memory limit for the trace-agent process under BPM.
         default: ""
+        optional: true
         description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
       - name: bpm_trace_agent_open_files
         configurable: true
@@ -538,6 +541,7 @@ forms:
         type: string
         label: Memory limit for the system-probe process under BPM.
         default: ""
+        optional: true
         description: The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M.
       - name: bpm_system_probe_open_files
         configurable: true
