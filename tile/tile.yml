@@ -488,6 +488,113 @@ forms:
     description: |
       Whether or not to send the Agent configuration to Datadog to be displayed in the Agent Configuration section of the host detail panel.
 
+  - name: bpm_enabled
+    type: selector
+    label: Select the desired BOSH processes manager
+    default: "monit"
+    description: |
+      Whether to use monit or BPM to manage the Datadog Agent processes.
+    option_templates:
+    - name: disabled_option
+      select_value: "monit"
+      property_blueprints:
+      - name: enabled_value
+        type: boolean
+        configurable: false
+        default: false
+      named_manifests:
+      - name: bpm_enabled
+        manifest: |
+          false
+    - name: enabled_option
+      select_value: "BPM"
+      named_manifests:
+      - name: bpm_enabled
+        manifest: |
+          true
+      property_blueprints:
+      - name: enabled_value
+        type: boolean
+        configurable: false
+        default: true
+      - name: bpm_agent_memory
+        configurable: true
+        type: string
+        label: Memory limit for the agent process under BPM.
+        default: ""
+        optional: true
+        description: The memory limit to apply to the agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+      - name: bpm_agent_open_files
+        configurable: true
+        type: integer
+        label: Open files limit for the agent process under BPM.
+        default: 1024
+        description: The number of files the agent process is allowed to have open at any one time.
+      - name: bpm_agent_processes
+        configurable: true
+        type: integer
+        label: Processes limit for the agent process under BPM.
+        default: 256
+        description: The number of processes which the agent process is allowed to have running at any one moment (inclusive of the main process).
+      - name: bpm_process_agent_memory
+        configurable: true
+        type: string
+        label: Memory limit for the process-agent process under BPM.
+        default: ""
+        optional: true
+        description: The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+      - name: bpm_process_agent_open_files
+        configurable: true
+        type: integer
+        label: Open files limit for the process-agent process under BPM.
+        default: 1024
+        description: The number of files the process-agent process is allowed to have open at any one time.
+      - name: bpm_process_agent_processes
+        configurable: true
+        type: integer
+        label: Processes limit for the process-agent process under BPM.
+        default: 256
+        description: The number of processes which the process-agent process is allowed to have running at any one moment (inclusive of the main process).
+      - name: bpm_trace_agent_memory
+        configurable: true
+        type: string
+        label: Memory limit for the trace-agent process under BPM.
+        default: ""
+        optional: true
+        description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+      - name: bpm_trace_agent_open_files
+        configurable: true
+        type: integer
+        label: Open files limit for the trace-agent process under BPM.
+        default: 1024
+        description: The number of files the trace-agent process is allowed to have open at any one time.
+      - name: bpm_trace_agent_processes
+        configurable: true
+        type: integer
+        label: Processes limit for the trace-agent process under BPM.
+        default: 256
+        description: The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process).
+      - name: bpm_system_probe_memory
+        configurable: true
+        type: string
+        label: Memory limit for the system-probe process under BPM.
+        default: ""
+        optional: true
+        description: The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+      - name: bpm_system_probe_open_files
+        configurable: true
+        type: integer
+        label: Open files limit for the system-probe process under BPM.
+        default: 1024
+        description: The number of files the system-probe process is allowed to have open at any one time.
+      - name: bpm_system_probe_processes
+        configurable: true
+        type: integer
+        label: Processes limit for the system-probe process under BPM.
+        default: 256
+        description: The number of processes which the system-probe process is allowed to have running at any one moment (inclusive of the main process).
+
+
 - name: disk-check-config
   label: Disk integration configuration
   description: Use this to fully configure and customize the disk integration.
@@ -933,6 +1040,9 @@ forms:
       configurable: true
 
 packages:
+- name: bpm
+  type: bosh-release
+  path: resources/bpm-release.tgz
 - name: datadog-firehose-nozzle-release
   type: bosh-release
   path: resources/datadog-firehose-nozzle-release.tgz
@@ -1049,11 +1159,9 @@ packages:
       cloud_foundry_bbs:
         env_include: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_include.parsed_strings))
         env_exclude: (( .properties.cluster_agent_enabled.enabled_option.cloud_foundry_bbs_env_exclude.parsed_strings))
-
 - name: datadog-agent-boshrelease
   type: bosh-release
   path: resources/datadog-agent-boshrelease.tgz
-
 
 runtime_configs:
 - name: datadog-agent
@@ -1061,6 +1169,8 @@ runtime_configs:
     releases:
     - name: datadog-agent
       version: "4.15.1"     # Update this if update the agent
+    - name: bpm
+      version: "1.2.7"      # Update this if update bpm
     addons:
     - name: datadog
       include:
@@ -1154,7 +1264,29 @@ runtime_configs:
           retry_interval: (( .properties.container_tagger_retry_interval.value ))
           retry_count: (( .properties.container_tagger_retry_count.value ))
           shell_path: (( .properties.container_tagger_shell_path.value ))
-
+        bpm:
+          enabled: (( .properties.bpm_enabled.enabled_option.enabled_value.value ))
+          agent.memory: (( .properties.bpm_enabled.enabled_option.bpm_agent_memory.value || "" ))
+          agent.open_files: (( .properties.bpm_enabled.enabled_option.bpm_agent_open_files.value ))
+          agent.processes: (( .properties.bpm_enabled.enabled_option.bpm_agent_processes.value ))
+          process_agent.memory: (( .properties.bpm_enabled.enabled_option.bpm_process_agent_memory.value || "" ))
+          process_agent.open_files: (( .properties.bpm_enabled.enabled_option.bpm_process_agent_open_files.value ))
+          process_agent.processes: (( .properties.bpm_enabled.enabled_option.bpm_process_agent_processes.value ))
+          trace_agent.memory: (( .properties.bpm_enabled.enabled_option.bpm_trace_agent_memory.value || "" ))
+          trace_agent.open_files: (( .properties.bpm_enabled.enabled_option.bpm_trace_agent_open_files.value ))
+          trace_agent.processes: (( .properties.bpm_enabled.enabled_option.bpm_trace_agent_processes.value ))
+          system_probe.memory: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_memory.value || "" ))
+          system_probe.open_files: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_open_files.value ))
+          system_probe.processes: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_processes.value ))
+    - name: datadog-bpm
+      include:
+        deployments:
+          - (( ..datadog.deployment_name ))
+          - (( ..datadog-application-monitoring.deployment_name || "" ))
+      jobs:
+      - name: bpm
+        release: bpm
+      
 - name: datadog-agent-kube-control-plan
   runtime_config:
     releases:
