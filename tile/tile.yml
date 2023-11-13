@@ -40,14 +40,21 @@ forms:
     optional: true
     label: Datadog API URL for Nozzle
     description: |
-      The host of the Datadog intake server for the nozzle to send data to (e.g. https://app.datadoghq.com).
+      The host of the Datadog intake server for the nozzle to send data to (e.g. https://api.datadoghq.com).
       If not specified, the `Datadog API URL for metrics` in the field below will be used.
+  - name: nozzle_log_url
+    type: string
+    optional: true
+    label: Datadog Log Intake URL for Nozzle
+    description: |
+      The host of the Datadog log intake server for the nozzle to send data to (e.g. https://agent-http-intake.logs.datadoghq.com).
+      If not specified, the `Datadog API URL for logs` in the field below will be used.
   - name: api_url
     type: string
     label: Datadog API URL for metrics
     optional: true
     description: |
-      The host to send metrics to (e.g. https://app.datadoghq.com).
+      The host to send metrics to (e.g. https://api.datadoghq.com).
       Use this if you need the Datadog Agent to send metrics to a custom URL, otherwise use the `site` property above.
   - name: process_dd_url
     type: string
@@ -109,53 +116,79 @@ forms:
   - name: additional_api_url_1
     type: string
     label: Additional Datadog API URL 1
-    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
-    default: https://app.datadoghq.com
+    description: The host of the Datadog intake server to send data to (e.g. https://api.datadoghq.com)
+    default: https://api.datadoghq.com
   - name: additional_api_key_1
     type: secret
     optional: true
     label: Additional Datadog API Key 1
     description: Your Datadog Additional API Key 1
+  - name: additional_log_intake_url_1
+    type: string
+    optional: true
+    label: Additional Datadog Log Intake URL 1
+    description: The host of the Datadog log intake server to send data to (e.g. https://agent-http-intake.logs.datadoghq.com)
+    default: https://agent-http-intake.logs.datadoghq.com
   - name: additional_api_url_2
     type: string
     label: Additional Datadog API URL 2
-    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
-    default: https://app.datadoghq.com
+    description: The host of the Datadog intake server to send data to (e.g. https://api.datadoghq.com)
+    default: https://api.datadoghq.com
   - name: additional_api_key_2
     type: secret
     optional: true
     label: Additional Datadog API Key 2
     description: Your Datadog Additional API Key 2
+  - name: additional_log_intake_url_2
+    type: string
+    optional: true
+    label: Additional Datadog Log Intake URL 2
+    description: The host of the Datadog log intake server to send data to (e.g. https://api.datadoghq.com)
   - name: additional_api_url_3
     type: string
     label: Additional Datadog API URL 3
-    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
-    default: https://app.datadoghq.com
+    description: The host of the Datadog intake server to send data to (e.g. https://api.datadoghq.com)
+    default: https://api.datadoghq.com
   - name: additional_api_key_3
     type: secret
     optional: true
     label: Additional Datadog API Key 3
     description: Your Datadog Additional API Key 3
+  - name: additional_log_intake_url_3
+    type: string
+    optional: true
+    label: Additional Datadog Log Intake URL 3
+    description: The host of the Datadog log intake server to send data to (e.g. https://api.datadoghq.com)
   - name: additional_api_url_4
     type: string
     label: Additional Datadog API URL 4
-    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
-    default: https://app.datadoghq.com
+    description: The host of the Datadog intake server to send data to (e.g. https://api.datadoghq.com)
+    default: https://api.datadoghq.com
   - name: additional_api_key_4
     type: secret
     optional: true
     label: Additional Datadog API Key 4
     description: Your Datadog Additional API Key 4
+  - name: additional_log_intake_url_4
+    type: string
+    optional: true
+    label: Additional Datadog Log Intake URL 4
+    description: The host of the Datadog log intake server to send data to (e.g. https://api.datadoghq.com)
   - name: additional_api_url_5
     type: string
     label: Additional Datadog API URL 5
-    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
-    default: https://app.datadoghq.com
+    description: The host of the Datadog intake server to send data to (e.g. https://api.datadoghq.com)
+    default: https://api.datadoghq.com
   - name: additional_api_key_5
     type: secret
     optional: true
     label: Additional Datadog API Key 5
     description: Your Datadog Additional API Key 5
+  - name: additional_log_intake_url_5
+    type: string
+    optional: true
+    label: Additional Datadog Log Intake URL 5
+    description: The host of the Datadog log intake server to send data to (e.g. https://api.datadoghq.com)
 
 - name: datadog-nozzle-config
   label: Datadog Firehose Nozzle Config
@@ -185,6 +218,11 @@ forms:
     label: Enable Metadata Collection
     default: false
     description: Collect application, space and organization labels and annotations to tag App Metrics.
+  - name: enable_application_logs
+    type: boolean
+    label: Enable Application Logs
+    default: false
+    description: Collect application logs from the Loggregator.
   - name: enable_advanced_tagging
     type: boolean
     label: Enable Advanced Tagging
@@ -1019,16 +1057,22 @@ packages:
       datadog:
         api_key: (( .properties.api_key.value ))
         api_url: (( .properties.nozzle_api_url.value || .properties.api_url.value ))
+        log_intake_url: (( .properties.nozzle_log_url.value || .properties.logs_dd_url.value ))
         additional_api_key_1: (( .properties.additional_api_key_1.value ))
         additional_api_url_1: (( .properties.additional_api_url_1.value ))
+        additional_log_intake_url_1: (( .properties.additional_log_intake_url_1.value ))
         additional_api_key_2: (( .properties.additional_api_key_2.value ))
         additional_api_url_2: (( .properties.additional_api_url_2.value ))
+        additional_log_intake_url_2: (( .properties.additional_log_intake_url_2.value ))
         additional_api_key_3: (( .properties.additional_api_key_3.value ))
         additional_api_url_3: (( .properties.additional_api_url_3.value ))
+        additional_log_intake_url_3: (( .properties.additional_log_intake_url_3.value ))
         additional_api_key_4: (( .properties.additional_api_key_4.value ))
         additional_api_url_4: (( .properties.additional_api_url_4.value ))
+        additional_log_intake_url_4: (( .properties.additional_log_intake_url_4.value ))
         additional_api_key_5: (( .properties.additional_api_key_5.value ))
         additional_api_url_5: (( .properties.additional_api_url_5.value ))
+        additional_log_intake_url_5: (( .properties.additional_log_intake_url_5.value ))
         metric_prefix: (( .properties.metric_prefix.value ))
         custom_tags: (( .properties.tags.value ))
         flush_max_bytes: (( .properties.flush_max_bytes.value ))
@@ -1046,6 +1090,7 @@ packages:
         https_proxy_url: (( .properties.https_proxy_url.value ))
         no_proxy: (( .properties.no_proxy.value ))
         enable_metadata_collection: (( .properties.enable_metadata_collection.value ))
+        enable_application_logs: (( .properties.enable_application_logs.value ))
         metadata_keys_whitelist_patterns: (( .properties.metadata_keys_whitelist_patterns.parsed_strings ))
         metadata_keys_blacklist_patterns: (( .properties.metadata_keys_blacklist_patterns.parsed_strings ))
         dca_enabled: (( .properties.use_cluster_agent_api.value ))
