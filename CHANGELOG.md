@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.9.0 / 2023-11-15
+## 5.9.0 / 2023-11-16
 
 * [Added] Add options for nozzle logs collection. See [#107](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/107).
 * [Added] Add support for BPM. See [#106](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/106).
