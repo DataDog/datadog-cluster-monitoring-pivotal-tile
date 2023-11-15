@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.9.0 / 2023-11-15
+
+* [Added] Add options for nozzle logs collection. See [#107](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/107).
+* [Added] Add support for BPM. See [#106](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/106).
+
 ## 5.8.0 / 2023-09-21
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.15.1. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.15.1) for details.
