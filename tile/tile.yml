@@ -1168,7 +1168,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "4.15.1"     # Update this if update the agent
+      version: "4.16.0"     # Update this if update the agent
     - name: bpm
       version: "1.2.7"      # Update this if update bpm
     addons:
@@ -1291,7 +1291,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "4.15.1"     # Update this if update the agent
+      version: "4.16.0"     # Update this if update the agent
     addons:
     - name: datadog
       include:
