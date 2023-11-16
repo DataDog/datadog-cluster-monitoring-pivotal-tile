@@ -2,7 +2,10 @@
 
 ## 5.9.0 / 2023-11-16
 
-* [Added] Add options for nozzle logs collection. See [#107](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/107).
+* [Added] Bump Datadog Agent Bosh Release to version 4.16.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.16.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.7.1. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.7.1) for details.
+* [Added] Bump Datadog Firehose Nozzle Release to version 87. See [here](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/87) for details.
+* [Added] Add options for Nozzle logs collection. See [#107](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/107).
 * [Added] Add support for BPM. See [#106](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/106).
 
 ## 5.8.0 / 2023-09-21
