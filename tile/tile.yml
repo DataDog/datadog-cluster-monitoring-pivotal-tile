@@ -1282,7 +1282,6 @@ runtime_configs:
       include:
         deployments:
           - (( ..datadog.deployment_name ))
-          - (( ..datadog-application-monitoring.deployment_name || "" ))
       jobs:
       - name: bpm
         release: bpm
