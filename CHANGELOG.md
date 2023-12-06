@@ -2,7 +2,7 @@
 
 ## 5.9.1 / 2023-12-06
 
-* [Fixed] Fix optional property with default value error. See [#112](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/112).
+* [Fixed] Fix BPM memory optional values with default error. See [#113](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/113).
 * [Fixed] Fix missing `datadog-application-monitoring` product in the runtime_config. See [#110](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/110).
 
 ## 5.9.0 / 2023-11-16
