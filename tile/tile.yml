@@ -1275,8 +1275,21 @@ runtime_configs:
           system_probe.processes: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_processes.value ))
     - name: datadog-bpm
       include:
-        deployments:
-          - (( ..datadog.deployment_name ))
+        stemcell: (( .properties.include_stemcell.parsed_manifest(stemcell) ))
+        deployments: (( .properties.include_deployments.parsed_manifest(deployments) ))
+        jobs: (( .properties.include_jobs.parsed_manifest(jobs) ))
+        instance_groups: (( .properties.include_instance_groups.parsed_manifest(instance_groups) ))
+        networks: (( .properties.include_networks.parsed_manifest(networks) ))
+        teams: (( .properties.include_teams.parsed_manifest(teams) ))
+        lifecycle: (( .properties.include_lifecycle.value || "" ))
+      exclude:
+        stemcell: (( .properties.exclude_stemcell.parsed_manifest(stemcell) ))
+        deployments: (( .properties.exclude_deployments.parsed_manifest(deployments) ))
+        jobs: (( .properties.exclude_jobs.parsed_manifest(jobs) ))
+        instance_groups: (( .properties.exclude_instance_groups.parsed_manifest(instance_groups) ))
+        networks: (( .properties.exclude_networks.parsed_manifest(networks) ))
+        teams: (( .properties.exclude_teams.parsed_manifest(teams) ))
+        lifecycle: (( .properties.exclude_lifecycle.value || "" ))
       jobs:
       - name: bpm
         release: bpm
