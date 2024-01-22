@@ -1164,8 +1164,6 @@ runtime_configs:
     releases:
     - name: datadog-agent
       version: "4.16.0"     # Update this if update the agent
-    - name: bpm
-      version: "1.2.7"      # Update this if update bpm
     addons:
     - name: datadog
       include:
@@ -1273,13 +1271,6 @@ runtime_configs:
           system_probe.memory: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_memory.value || "" ))
           system_probe.open_files: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_open_files.value ))
           system_probe.processes: (( .properties.bpm_enabled.enabled_option.bpm_system_probe_processes.value ))
-    - name: datadog-bpm
-      include:
-        deployments:
-          - (( ..datadog.deployment_name ))
-      jobs:
-      - name: bpm
-        release: bpm
 
 - name: datadog-agent-kube-control-plan
   runtime_config:
