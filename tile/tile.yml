@@ -1035,9 +1035,6 @@ forms:
       configurable: true
 
 packages:
-- name: bpm
-  type: bosh-release
-  path: resources/bpm-release.tgz
 - name: datadog-firehose-nozzle-release
   type: bosh-release
   path: resources/datadog-firehose-nozzle-release.tgz
