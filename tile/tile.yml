@@ -1260,7 +1260,7 @@ runtime_configs:
           retry_count: (( .properties.container_tagger_retry_count.value ))
           shell_path: (( .properties.container_tagger_shell_path.value ))
         bpm:
-          enabled: (( .properties.bpm_enabled.enabled_option.enabled_value.value ))
+          enabled: (( .properties.bpm_enabled.selected_option.parsed_manifest(bpm_enabled) ))
           agent.memory: (( .properties.bpm_enabled.enabled_option.bpm_agent_memory.value || "" ))
           agent.open_files: (( .properties.bpm_enabled.enabled_option.bpm_agent_open_files.value ))
           agent.processes: (( .properties.bpm_enabled.enabled_option.bpm_agent_processes.value ))
