@@ -10,8 +10,6 @@
 
 BPM will not be included with the tile moving forward. To handle agent processes, a separate BPM installation is required.
 
-
-
 ## 5.9.1 / 2023-12-06
 
 * [Fixed] Fix BPM memory optional values with default error. See [#113](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/113).
