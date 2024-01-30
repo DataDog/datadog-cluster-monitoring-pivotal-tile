@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.0.0 / 2024-01-30
+
+* [Fixed] Fix monit / BPM selector always enabling BPM. See [#116](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/116).
+* [Fixed] Fix optional and default value error message. See [#114](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/114).
+* [Changed] Remove `datadog-bpm` job and `bpm` release. See [#117](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/117).
+
+#### Breaking Changes:
+
+BPM will not be included with the tile moving forward. To handle agent processes, a separate BPM installation is required.
+
 ## 5.9.1 / 2023-12-06
 
 * [Fixed] Fix BPM memory optional values with default error. See [#113](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/113).
