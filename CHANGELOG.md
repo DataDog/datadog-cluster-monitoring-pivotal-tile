@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.1.0 / 2024-06-06
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.18.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.18.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.8.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.9.0) for details.
+
+
 ## 6.0.0 / 2024-01-30
 
 * [Fixed] Fix monit / BPM selector always enabling BPM. See [#116](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/116).
