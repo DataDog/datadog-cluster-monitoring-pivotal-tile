@@ -4,10 +4,9 @@ set -e
 
 RESOURCES_DIR="tile/resources"
 
-AGENT_VERSION=4.15.1
-CLUSTER_AGENT_VERSION=2.6.0
-NOZZLE_RELEASE_VERSION=86
-BPM_VERSION=1.2.7
+AGENT_VERSION=4.18.0
+CLUSTER_AGENT_VERSION=2.9.0
+NOZZLE_RELEASE_VERSION=87
 
 # download agent bosh release tarball
 curl -L "https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-$AGENT_VERSION.tgz" -o $RESOURCES_DIR/datadog-agent-boshrelease.tgz
@@ -17,6 +16,3 @@ curl -L "https://cloudfoundry.datadoghq.com/datadog-cluster-agent/datadog-cluste
 
 # download nozzle bosh release tarball
 curl -L "https://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-$NOZZLE_RELEASE_VERSION.tgz" -o $RESOURCES_DIR/datadog-firehose-nozzle-release.tgz
-
-# download bpm bosh release tarball
-curl -L "https://bosh.io/d/github.com/cloudfoundry/bpm-release?v=$BPM_VERSION" -o $RESOURCES_DIR/bpm-release.tgz
