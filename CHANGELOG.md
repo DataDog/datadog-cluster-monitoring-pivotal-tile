@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.1.0 / 2024-11-19
+## 6.1.1 / 2024-11-21
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.19.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.19.0) for details.
 * [Added] Bump Datadog Cluster Agent Bosh Release to version 2.10.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.10.0) for details.
