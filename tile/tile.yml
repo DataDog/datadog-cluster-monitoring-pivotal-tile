@@ -335,6 +335,11 @@ forms:
     type: boolean
     default: false
     description: Enable the system probe.
+  - name: traceroute_enabled
+    type: boolean
+    default: false
+    label: Enable System Probe Traceroute Module
+    description: Enable the System Probe traceroute module, which is required for Network Path.
   - name: disable_network_performance_monitoring
     type: boolean
     label: Disable Network Performance Monitoring
@@ -1212,6 +1217,7 @@ runtime_configs:
           force_tls_12: (( .properties.force_tls_12.value ))
           enable_remote_configuration: (( .properties.enable_remote_configuration.value ))
           enable_inventories_configuration: (( .properties.enable_inventories_configuration.value ))
+          traceroute_enabled: (( .properties.traceroute_enabled.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
@@ -1314,6 +1320,7 @@ runtime_configs:
           force_tls_12: (( .properties.force_tls_12.value ))
           enable_remote_configuration: (( .properties.enable_remote_configuration.value ))
           enable_inventories_configuration: (( .properties.enable_inventories_configuration.value ))
+          traceroute_enabled: (( .properties.traceroute_enabled.value ))
           url: (( .properties.api_url.value ))
           process_dd_url: (( .properties.process_dd_url.value ))
           apm_dd_url: (( .properties.apm_dd_url.value ))
