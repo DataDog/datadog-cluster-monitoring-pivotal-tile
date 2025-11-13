@@ -435,6 +435,11 @@ forms:
     type: boolean
     default: false
     description: Enable the Logs Agent on all virtual machines
+  - name: logs_expected_tags_duration
+    label: Logs Expected Tags Duration
+    type: integer
+    optional: true
+    description: Duration in seconds to wait for tags to be collected before logs are submitted (logs configuration).
   - name: strip_proc_arguments
     label: Strip process arguments
     type: boolean
@@ -1246,6 +1251,7 @@ runtime_configs:
           address_tag: (( .properties.address_tag.value ))
           trace_agent_enabled: (( .properties.trace_agent.value ))
           enable_logs_agent: (( .properties.logs_enabled.value ))
+          logs_expected_tags_duration: (( .properties.logs_expected_tags_duration.value ))
           strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
           secret_backend_command: (( .properties.secret_backend_command.value ))
           secret_backend_arguments: (( .properties.secret_backend_arguments.parsed_strings ))
@@ -1349,6 +1355,7 @@ runtime_configs:
           address_tag: (( .properties.address_tag.value ))
           trace_agent_enabled: (( .properties.trace_agent.value ))
           enable_logs_agent: (( .properties.logs_enabled.value ))
+          logs_expected_tags_duration: (( .properties.logs_expected_tags_duration.value ))
           strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
           secret_backend_command: (( .properties.secret_backend_command.value ))
           secret_backend_arguments: (( .properties.secret_backend_arguments.parsed_strings ))
