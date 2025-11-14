@@ -437,9 +437,9 @@ forms:
     description: Enable the Logs Agent on all virtual machines
   - name: logs_expected_tags_duration
     label: Logs Expected Tags Duration
-    type: integer
+    type: string
     optional: true
-    description: Duration in seconds to wait for tags to be collected before logs are submitted (logs configuration).
+    description: "Apply host-level tags known by the Agent to all logs for this duration (default: 0s, example: 10m)"
   - name: strip_proc_arguments
     label: Strip process arguments
     type: boolean
