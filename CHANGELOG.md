@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.4.0 / 2025-11-19
+
+* [Changed] Add option for `logs_expected_tags_duration` agent property. See [#125](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/125).
+* [Changed] Add option to enable the traceroute system probe submodule. See [#123](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/123).
+
 ## 6.3.0 / 2025-04-30
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.21.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.21.0) for details.
