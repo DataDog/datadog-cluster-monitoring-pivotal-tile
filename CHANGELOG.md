@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0 / 2025-11-19
+
+* [Changed] Add option for `logs_expected_tags_duration` agent property. See [#125](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/125).
+* [Changed] Add option to enable the traceroute system probe submodule. See [#123](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/123).
+* [Added] Bump Datadog Agent Bosh Release to version 4.24.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.24.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.14.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.14.0) for details.
+* [Added] Bump Datadog Firehose Nozzle Release to version 88. See [here](https://github.com/DataDog/datadog-firehose-nozzle-release/releases/tag/88) for details.
+
 ## 6.3.0 / 2025-04-30
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.21.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.21.0) for details.
