@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.5.0 / 2026-03-17
+
+* [Changed] Replace invalid team platform-integrations with agent-integrations in CODEOWNERS. See [#128](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/128).
 ## 6.4.0 / 2025-11-19
 
 * [Changed] Add option for `logs_expected_tags_duration` agent property. See [#125](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/125).
