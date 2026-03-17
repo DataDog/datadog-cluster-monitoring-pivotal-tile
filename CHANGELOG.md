@@ -2,7 +2,9 @@
 
 ## 6.5.0 / 2026-03-17
 
-* [Changed] Replace invalid team platform-integrations with agent-integrations in CODEOWNERS. See [#128](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/128).
+* [Added] Bump Datadog Agent Bosh Release to version 4.25.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.25.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.15.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.15.0) for details.
+
 ## 6.4.0 / 2025-11-19
 
 * [Changed] Add option for `logs_expected_tags_duration` agent property. See [#125](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/125).
