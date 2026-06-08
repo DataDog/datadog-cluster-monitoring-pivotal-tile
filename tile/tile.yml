@@ -278,6 +278,18 @@ forms:
     constraints:
       min: 100
       max: 5000
+  - name: nozzle_bosh_tags_enabled
+    type: boolean
+    label: Enable BOSH Tags for Logs
+    default: false
+    description: |
+      Enable BOSH tag generation to enrich logs.
+      When enabled, BOSH tags and friendly hostnames are generated from
+      Loggregator envelope metadata and are populated in each log.
+      This is useful for BYOC, Observability Pipelines, or any downstream
+      system that has no information about host metadata.
+      This is not needed if you send logs directly to Datadog SaaS as the
+      platform enriches those logs at intake.
 
 - name: datadog-agent-config
   label: Datadog Agent Config
@@ -1102,6 +1114,12 @@ packages:
         dca_token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
         enable_advanced_tagging: (( .properties.enable_advanced_tagging.value ))
         enable_metadata_app_metrics_prefix : (( .properties.enable_metadata_app_metrics_prefix.value ))
+        bosh_tags:
+          enabled: (( .properties.nozzle_bosh_tags_enabled.value ))
+          friendly_hostname: (( .properties.use_friendly_hostname.value ))
+          unique_friendly_hostname: (( .properties.unique_friendly_hostname.value ))
+          friendly_hostname_append_guid: (( .properties.friendly_hostname_append_vm_guid.value ))
+          use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
       uaa:
         client: (( .properties.uaa_client.value ))
         client_secret: (( .properties.uaa_secret.value ))
