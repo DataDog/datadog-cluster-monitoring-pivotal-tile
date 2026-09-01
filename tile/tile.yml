@@ -1189,7 +1189,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "4.25.0"     # Update this if update the agent
+      version: "4.26.0"     # Update this if update the agent
     addons:
     - name: datadog
       include:
@@ -1304,7 +1304,7 @@ runtime_configs:
   runtime_config:
     releases:
     - name: datadog-agent
-      version: "4.25.0"     # Update this if update the agent
+      version: "4.26.0"     # Update this if update the agent
     addons:
     - name: datadog
       include:
