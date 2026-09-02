@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.6.0 / 2026-09-01
+
+* [Added] Bump Datadog Agent Bosh Release to version 4.26.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.26.0) for details.
+* [Added] Bump Datadog Cluster Agent Bosh Release to version 2.16.0. See [here](https://github.com/DataDog/datadog-cluster-agent-boshrelease/releases/tag/2.16.0) for details.
+* [Changed] Add BOSH tags and hostname config for nozzle CloudPrem logs. See [#131](https://github.com/DataDog/datadog-cluster-monitoring-pivotal-tile/pull/131).
+
 ## 6.5.0 / 2026-03-17
 
 * [Added] Bump Datadog Agent Bosh Release to version 4.25.0. See [here](https://github.com/DataDog/datadog-agent-boshrelease/releases/tag/4.25.0) for details.
