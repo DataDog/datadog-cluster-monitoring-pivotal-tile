@@ -27,6 +27,9 @@ jobs:
           pip install --upgrade pip
           pip install tile-generator==15.0.2
 
+      - name: Test Agent destination settings
+        run: python3 -m unittest discover -s tests -p 'test_agent_destination.py' -v
+
       - name: Verify tile-generator installation
         run: tile --version
 
