@@ -32,9 +32,15 @@ forms:
     label: Datadog API site
     optional: true
     description: |
-      The site of the Datadog intake to send Agent data to. Set to `datadoghq.eu` to send data to the EU site.
-      If unset, it defaults do `datadoghq.com`.
+      The site of the Datadog intake for Node and Cluster Agents. Set to `datadoghq.eu` to send data to the EU site.
+      If unset, it defaults to `datadoghq.com`.
       If you set a URL in any of the "API URL" fields below, setting the site has no effect for that specific component, so empty it if you want to use site.
+  - name: convert_dd_site_fqdn_enabled
+    configurable: true
+    type: boolean
+    label: Convert Datadog site hostnames to FQDNs
+    default: true
+    description: Add a trailing dot to Datadog site hostnames for Node and Cluster Agents. Disable for compatibility with DNS environments that do not accept trailing dots.
   - name: nozzle_api_url
     type: string
     optional: true
@@ -1145,6 +1151,9 @@ packages:
     properties:
       cluster_agent:
         api_key: (( .properties.api_key.value ))
+        site: (( .properties.site.value ))
+        convert_dd_site_fqdn:
+          enabled: (( .properties.convert_dd_site_fqdn_enabled.value ))
         force_tls_12: (( .properties.force_tls_12.value ))
         bbs_url: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_bbs_url.value ))
         locket_api_location: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_locket_api.value ))
@@ -1276,6 +1285,9 @@ runtime_configs:
           secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value ))
           secret_backend_timeout: (( .properties.secret_backend_timeout.value ))
           cluster_agent_poll_interval: (( .properties.cluster_agent_poll_interval.value ))
+          agent_config:
+            convert_dd_site_fqdn:
+              enabled: (( .properties.convert_dd_site_fqdn_enabled.value ))
         cluster_agent:
           token: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_token.value ))
           port: (( .properties.cluster_agent_enabled.enabled_option.cluster_agent_port.value ))
@@ -1380,6 +1392,9 @@ runtime_configs:
           secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value ))
           secret_backend_timeout: (( .properties.secret_backend_timeout.value ))
           cluster_agent_poll_interval: (( .properties.cluster_agent_poll_interval.value ))
+          agent_config:
+            convert_dd_site_fqdn:
+              enabled: (( .properties.convert_dd_site_fqdn_enabled.value ))
           integrations:
             etcd:
               init_config: {}
